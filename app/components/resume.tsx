@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Leaf, BookOpen, Briefcase, Code, GraduationCap, Calendar, FileText, Menu, X, Cpu, Bitcoin, Database, Cloud, Server, Star, DatabaseBackup, Github, Linkedin, Instagram, Send } from "lucide-react"
+import { Leaf, BookOpen, Briefcase, Code, GraduationCap, Calendar, FileText, Menu, X, Star, DatabaseBackup, Github, Linkedin, Instagram, Send } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
