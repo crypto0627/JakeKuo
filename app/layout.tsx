@@ -33,7 +33,7 @@ export default function RootLayout({
         <link rel="canonical" href="https://www.jakekuo.com" />
         <meta name="author" content="Jake Kuo" />
         <meta name="keywords" content="jakekuo, Jake Kuo, web3, student DAO, blockchain, decentralized, students, xuedao, frontend, portfolio" />
-        <meta name="google-site-verification" content={process.env.GOOGLE_SITE_VERIFICATION_CODE} />
+        <meta name="google-site-verification" content="vFD8yoTL3W9giye6gqvAc_dEomyj_BiY7LqcPfrysEY" />
         {/* Google Analytics GTag Script */}
         <script async src={"https://www.googletagmanager.com/gtag/js?id="+ process.env.GA4}></script>
         <script
