@@ -94,7 +94,7 @@ export default function Component() {
                 <p className="mb-4">Website: <Link className="hover:text-green-500" href="https://www.xuedao.xyz" target="_blank">https://www.xuedao.xyz</Link> </p>
                 <Button className="mb-4 bg-green-600 hover:bg-green-900">
                   <Link href="/JakeKuo-Resume.pdf" target="_blank" download>
-                    Download CV
+                    Download Resume
                   </Link>
                 </Button>
                 <div className="">
