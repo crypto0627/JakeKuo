@@ -40,15 +40,6 @@ export default function Component() {
 
   return (
     <div className="min-h-screen bg-green-50 text-green-900 font-sans relative overflow-hidden">
-      {/* Background Icons */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <Cpu className="absolute top-1/4 left-1/4 w-24 h-24 text-green-800" />
-        <Bitcoin className="absolute top-3/4 left-1/3 w-32 h-32 text-green-800" />
-        <Database className="absolute top-1/2 right-1/4 w-28 h-28 text-green-800" />
-        <Cloud className="absolute bottom-1/4 right-1/3 w-20 h-20 text-green-800" />
-        <Server className="absolute top-1/3 right-1/2 w-24 h-24 text-green-800" />
-      </div>
-
       {/* Navbar */}
       <nav className="bg-green-800 text-white p-4 sticky top-0 z-10">
         <div className="container mx-auto flex justify-between items-center">
