@@ -33,15 +33,16 @@ export default function RootLayout({
         <link rel="canonical" href="https://www.jakekuo.com" />
         <meta name="author" content="Jake Kuo" />
         <meta name="keywords" content="jakekuo, Jake Kuo, web3, student DAO, blockchain, decentralized, students, xuedao, frontend, portfolio" />
+        <meta name="google-site-verification" content={process.env.GOOGLE_SITE_VERIFICATION_CODE} />
         {/* Google Analytics GTag Script */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-VS5WGZP3LN"></script>
+        <script async src={"https://www.googletagmanager.com/gtag/js?id="+ process.env.GA4}></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-VS5WGZP3LN');
+              gtag('config', ${process.env.GA4});
             `,
           }}
         />
