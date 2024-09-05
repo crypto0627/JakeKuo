@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Head from 'next/head';
 import localFont from "next/font/local";
 import "./globals.css";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -34,17 +35,7 @@ export default function RootLayout({
         <meta name="author" content="Jake Kuo" />
         <meta name="keywords" content="jakekuo, Jake Kuo, web3, student DAO, blockchain, decentralized, students, xuedao, frontend, portfolio" />
         {/* Google Analytics GTag Script */}
-        <script async src={"https://www.googletagmanager.com/gtag/js?id="+ process.env.GA4}></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', ${process.env.GA4});
-            `,
-          }}
-        />
+        <GoogleAnalytics gaId="G-VS5WGZP3LN" />
       </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
