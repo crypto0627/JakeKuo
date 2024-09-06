@@ -73,8 +73,8 @@ export default function Component() {
               <Image
                 src="/profile.webp"
                 alt="Jake Kuo"
-                width={200}
-                height={200}
+                width={150}
+                height={150}
                 className="rounded-xl mb-4 md:mb-0 md:mr-6 w-auto h-auto"
                 priority
               />
