@@ -49,7 +49,7 @@ const NavLinks = ({ onClose }: { onClose: () => void }) => (
 const SocialIcons = () => (
   <div className="flex space-x-4">
     {[
-      { href: 'https://github.com/crypto0626', Icon: Github },
+      { href: 'https://github.com/crypto0627', Icon: Github },
       {
         href: 'https://www.linkedin.com/in/lai-hung-kuo-83b186245/',
         Icon: Linkedin,
