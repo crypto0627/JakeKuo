@@ -1,5 +1,5 @@
 'use client'
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
@@ -26,21 +26,20 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import React, { forwardRef } from 'react'
 
 const NavLinks = ({ onClose }: { onClose: () => void }) => (
   <>
     {['profile', 'experience', 'skills', 'education', 'events', 'projects'].map(
       (section) => (
-        <motion.a
+        <a
           key={section}
           href={`#${section}`}
           className="block py-2 hover:text-green-200"
           onClick={onClose}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
         >
           {section.charAt(0).toUpperCase() + section.slice(1)}
-        </motion.a>
+        </a>
       )
     )}
   </>
@@ -70,20 +69,17 @@ const SocialIcons = () => (
   </div>
 )
 
-const Section = ({
-  id,
-  title,
-  Icon,
-  children,
-}: {
-  id: string
-  title: string
-  Icon: React.ElementType
-  children: React.ReactNode
-}) => {
-  const sectionRef = useRef(null)
+const Section = forwardRef<
+  HTMLElement,
+  {
+    id: string
+    title: string
+    Icon: React.ElementType
+    children: React.ReactNode
+  }
+>(({ id, title, Icon, children }, ref) => {
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
+    target: ref as React.RefObject<HTMLElement>,
     offset: ['start end', 'end start'],
   })
 
@@ -91,13 +87,11 @@ const Section = ({
   const y = useTransform(scrollYProgress, [0, 0.5, 1], [50, 0, -50])
 
   return (
-    <motion.section
-      id={id}
-      className="mb-12"
-      ref={sectionRef}
-      style={{ opacity, y }}
-    >
-      <h2 className="text-2xl font-bold mb-4 flex items-center">
+    <motion.section id={id} className="mb-12" ref={ref} style={{ opacity, y }}>
+      <h2
+        className="text-2xl font-bold mb-4 flex items-center"
+        data-testid={`${id}-heading`}
+      >
         <Icon className="mr-2" /> {title}
       </h2>
       <Card className="bg-white shadow-lg">
@@ -105,7 +99,9 @@ const Section = ({
       </Card>
     </motion.section>
   )
-}
+})
+
+Section.displayName = 'Section'
 
 const StaticSection = ({
   id,
@@ -120,7 +116,10 @@ const StaticSection = ({
 }) => {
   return (
     <section id={id} className="mb-12">
-      <h2 className="text-2xl font-bold mb-4 flex items-center">
+      <h2
+        className="text-2xl font-bold mb-4 flex items-center"
+        data-testid={`${id}-heading`}
+      >
         <Icon className="mr-2" /> {title}
       </h2>
       <Card className="bg-white shadow-lg">
@@ -183,7 +182,7 @@ export default function Component() {
               width={150}
               height={150}
               className="rounded-xl mb-4 md:mb-0 md:mr-6 w-auto h-auto"
-              priority
+              priority={true}
             />
             <div>
               <h1 className="text-3xl font-bold mb-2">Jake Kuo</h1>
