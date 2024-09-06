@@ -1,9 +1,9 @@
-import Resume from "./components/resume";
+import Resume from './components/resume'
 
 export default function Home() {
   return (
     <>
-    <Resume />
+      <Resume />
     </>
-  );
+  )
 }
