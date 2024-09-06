@@ -36,7 +36,7 @@ export default function RootLayout({
         <meta name="author" content="Jake Kuo" />
         <meta
           name="keywords"
-          content="jakekuo, Jake Kuo, web3, student DAO, blockchain, decentralized, students, xuedao, frontend, portfolio"
+          content="jakekuo, 郭來鴻, Jake Kuo, jake kuo, web3, student DAO, blockchain, decentralized, students, xuedao, frontend, portfolio"
         />
         {/* Google Analytics GTag Script */}
         <GoogleAnalytics gaId="G-VS5WGZP3LN" />

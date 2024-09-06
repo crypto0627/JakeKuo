@@ -1,16 +1,13 @@
 'use client'
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import {
   Leaf,
   Briefcase,
   Code,
   GraduationCap,
   Calendar,
-  Menu,
-  X,
   Github,
   Linkedin,
   Instagram,
@@ -25,8 +22,6 @@ import {
 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import React, { forwardRef } from 'react'
 
 const NavLinks = ({ onClose }: { onClose: () => void }) => (
   <>
@@ -56,54 +51,19 @@ const SocialIcons = () => (
       { href: 'https://www.instagram.com/klhong_0627/', Icon: Instagram },
       { href: 'https://t.me/JakeKuo', Icon: Send },
     ].map(({ href, Icon }) => (
-      <motion.div
+      <div
         key={href}
-        whileHover={{ scale: 1.2 }}
-        whileTap={{ scale: 0.8 }}
+        className="transform transition-transform hover:scale-110"
       >
         <Link href={href} target="_blank" rel="noopener noreferrer">
           <Icon className="w-5 h-5 hover:text-green-200" />
         </Link>
-      </motion.div>
+      </div>
     ))}
   </div>
 )
 
-const Section = forwardRef<
-  HTMLElement,
-  {
-    id: string
-    title: string
-    Icon: React.ElementType
-    children: React.ReactNode
-  }
->(({ id, title, Icon, children }, ref) => {
-  const { scrollYProgress } = useScroll({
-    target: ref as React.RefObject<HTMLElement>,
-    offset: ['start end', 'end start'],
-  })
-
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0])
-  const y = useTransform(scrollYProgress, [0, 0.5, 1], [50, 0, -50])
-
-  return (
-    <motion.section id={id} className="mb-12" ref={ref} style={{ opacity, y }}>
-      <h2
-        className="text-2xl font-bold mb-4 flex items-center"
-        data-testid={`${id}-heading`}
-      >
-        <Icon className="mr-2" /> {title}
-      </h2>
-      <Card className="bg-white shadow-lg">
-        <CardContent className="p-6">{children}</CardContent>
-      </Card>
-    </motion.section>
-  )
-})
-
-Section.displayName = 'Section'
-
-const StaticSection = ({
+const Section = ({
   id,
   title,
   Icon,
@@ -131,10 +91,10 @@ const StaticSection = ({
 
 export default function Component() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const closeMenu = useCallback(() => setIsMenuOpen(false), [])
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
   return (
-    <div className="min-h-screen bg-green-50 text-green-900 font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-green-50 text-green-900 font-sans relative">
       {/* Navbar */}
       <nav className="bg-green-800 text-white p-4 sticky top-0 z-10">
         <div className="container mx-auto flex justify-between items-center">
@@ -142,39 +102,32 @@ export default function Component() {
           <div className="hidden md:flex space-x-4">
             <NavLinks onClose={() => {}} />
           </div>
-          <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="md:hidden"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-              >
-                <div className="relative w-6 h-6">
-                  <Menu
-                    className={`absolute inset-0 transition-all duration-300 ease-in-out ${isMenuOpen ? 'opacity-0 rotate-90' : 'opacity-100 rotate-0'}`}
-                  />
-                  <X
-                    className={`absolute inset-0 transition-all duration-300 ease-in-out ${isMenuOpen ? 'opacity-100 rotate-90' : 'opacity-0 -rotate-90'}`}
-                  />
-                </div>
-              </Button>
-            </SheetTrigger>
-            <SheetContent
-              side="right"
-              className="w-[250px] bg-green-800 text-white"
-            >
-              <nav className="flex flex-col space-y-4 mt-8">
-                <NavLinks onClose={closeMenu} />
-              </nav>
-            </SheetContent>
-          </Sheet>
+          <button
+            className="md:hidden text-white focus:outline-none w-8 h-8 relative"
+            onClick={toggleMenu}
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          >
+            <span
+              className={`block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out ${isMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-2'}`}
+            />
+            <span
+              className={`block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}
+            />
+            <span
+              className={`block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out ${isMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-2'}`}
+            />
+          </button>
+        </div>
+        <div
+          className={`md:hidden transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}
+        >
+          <NavLinks onClose={() => setIsMenuOpen(false)} />
         </div>
       </nav>
 
       <div className="container mx-auto px-4 py-8">
         {/* Profile */}
-        <StaticSection id="profile" title="Profile" Icon={Leaf}>
+        <Section id="profile" title="Profile" Icon={Leaf}>
           <div className="flex flex-col md:flex-row items-center">
             <Image
               src="/profile.webp"
@@ -210,7 +163,7 @@ export default function Component() {
               <SocialIcons />
             </div>
           </div>
-        </StaticSection>
+        </Section>
 
         {/* Work Experience */}
         <Section id="experience" title="Work Experience" Icon={Briefcase}>
@@ -284,8 +237,6 @@ export default function Component() {
               <h3 className="font-semibold">API Technologies</h3>
               <ul className="list-disc list-inside mt-2">
                 <li>RESTful API</li>
-                <li>gRPC</li>
-                <li>GraphQL</li>
                 <li>Swagger API</li>
                 <li>JWT</li>
               </ul>
@@ -310,8 +261,8 @@ export default function Component() {
                 <li>MacOS homebrew</li>
                 <li>Windows WSL2</li>
                 <li>Docker</li>
-                <li>Cloudflare</li>
-                <li>AWS</li>
+                <li>Cloudflare pages</li>
+                <li>Vercel</li>
               </ul>
             </div>
             <div className="bg-green-100 p-4 rounded-lg">
@@ -491,6 +442,27 @@ export default function Component() {
             <Card className="bg-white shadow-lg">
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold mb-2">
+                  Blockchain Development Kit{' '}
+                  <Link
+                    className="text-sm font-semibold hover:text-green-500"
+                    href="https://github.com/cathayddt/bdk"
+                    target="_blank"
+                  >
+                    hhttps://github.com/cathayddt/bdk
+                  </Link>
+                </h3>
+                <p>
+                  BDK simplifies blockchain creation (using Hyperledger
+                  Fabric/Quorum) with command-line tools and npm packages,
+                  making network management and monitoring easier than ever.
+                  Interactive prompts are supported, triggered with -i or
+                  --interactive alongside all CLI commands.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="bg-white shadow-lg">
+              <CardContent className="p-6">
+                <h3 className="text-xl font-semibold mb-2">
                   XueDAO office website{' '}
                   <Link
                     className="text-sm font-semibold hover:text-green-500"
@@ -521,8 +493,9 @@ export default function Component() {
                   </Link>
                 </h3>
                 <p>
-                  The easiest way to deploy your Next.js app is to use the
-                  Vercel Platform from the creators of Next.js.
+                  Web3 Frontend Workshop template for xuedao hackathon, use
+                  Next.js 14 | React 18 | TailwindCSS | TypeScript | Vercel |
+                  Wagmi | Alchemy | Ethers.js
                 </p>
               </CardContent>
             </Card>
