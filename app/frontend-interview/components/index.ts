@@ -1,0 +1,5 @@
+export { default as Navbar } from './Navbar'
+export { default as Banner } from './Banner'
+export { default as Feature } from './Feature'
+export { default as Blog } from './Blog'
+export { default as Footer } from './Footer'
