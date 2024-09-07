@@ -1,8 +1,7 @@
 'use client'
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
 import Image from 'next/image'
-import { useSwipeable } from 'react-swipeable'
 
 const features = [
   {
@@ -22,90 +21,48 @@ const features = [
   },
 ]
 
+const AUTOPLAY_INTERVAL = 3000 // 3秒
+
 export default function Feature() {
-  const [offset, setOffset] = useState(0)
-  const [isTransitioning, setIsTransitioning] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const cardWidthRef = useRef<number>(0)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  const nextFeature = useCallback(() => {
-    if (containerRef.current) {
-      const cardWidth =
-        cardWidthRef.current || containerRef.current.children[0].clientWidth
-      setIsTransitioning(true)
-      setOffset((prev) => prev + cardWidth)
-
-      if (offset >= cardWidth * features.length * 3) {
-        setTimeout(() => {
-          setIsTransitioning(false)
-          setOffset(cardWidth * features.length)
-        }, 300) // 短暫移除動畫，重置位置
-      }
+  const resetTimeout = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
     }
-  }, [offset])
+  }
 
   useEffect(() => {
-    // 克隆的內容，保證無限循環
-    if (containerRef.current) {
-      cardWidthRef.current = containerRef.current.children[0].clientWidth
-      setOffset(cardWidthRef.current * features.length)
+    resetTimeout()
+    timeoutRef.current = setTimeout(
+      () =>
+        setCurrentIndex((prevIndex) =>
+          prevIndex === features.length - 1 ? 0 : prevIndex + 1
+        ),
+      AUTOPLAY_INTERVAL
+    )
+
+    return () => {
+      resetTimeout()
     }
-
-    const timer = setInterval(nextFeature, 3000) // 每3秒自動切換一次
-    return () => clearInterval(timer)
-  }, [nextFeature])
-
-  const handlers = useSwipeable({
-    onSwipedLeft: () => {
-      if (containerRef.current) {
-        const cardWidth = cardWidthRef.current
-        setIsTransitioning(true)
-        setOffset((prev) => prev + cardWidth)
-
-        if (offset >= cardWidth * features.length * 3) {
-          setTimeout(() => {
-            setIsTransitioning(false)
-            setOffset(cardWidth * features.length)
-          }, 300)
-        }
-      }
-    },
-    onSwipedRight: () => {
-      if (containerRef.current) {
-        const cardWidth = cardWidthRef.current
-        setIsTransitioning(true)
-        setOffset((prev) => prev - cardWidth)
-
-        if (offset <= 0) {
-          setTimeout(() => {
-            setIsTransitioning(false)
-            setOffset(cardWidth * features.length * 2)
-          }, 300)
-        }
-      }
-    },
-    trackMouse: true,
-  })
+  }, [currentIndex])
 
   return (
-    <section
-      className="py-12 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden"
-      {...handlers}
-    >
+    <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl text-center mb-8">
           Our Features
         </h2>
-        <div className="relative">
+        <div className="relative overflow-hidden">
           <div
-            ref={containerRef}
-            className={`flex ${isTransitioning ? 'transition-transform duration-300 ease-linear' : ''}`}
-            style={{ transform: `translateX(-${offset}px)` }}
+            className="flex transition-transform duration-500 ease-out"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
-            {[...features, ...features, ...features].map((feature, index) => (
+            {features.map((feature, index) => (
               <Card
                 key={index}
-                className="w-full md:w-1/3 flex-shrink-0 relative overflow-hidden h-[400px] mx-2"
+                className="flex-shrink-0 w-full relative overflow-hidden h-[400px]"
               >
                 <Image
                   src={feature.image}
