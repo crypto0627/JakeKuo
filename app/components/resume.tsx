@@ -25,7 +25,7 @@ import Link from 'next/link'
 
 const NavLinks = ({ onClose }: { onClose: () => void }) => (
   <>
-    {['frontend-interview'].map((section) => (
+    {['blog', 'frontend-interview'].map((section) => (
       <a
         key={section}
         href={`/${section}`}

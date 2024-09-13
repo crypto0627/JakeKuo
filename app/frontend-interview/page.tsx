@@ -1,8 +1,8 @@
 import {
   Navbar,
   Banner,
+  Questions,
   Feature,
-  Blog,
   Footer,
 } from '@/app/frontend-interview/components'
 
@@ -13,7 +13,7 @@ export default function Home() {
       <main className="flex-grow">
         <Banner />
         <Feature />
-        <Blog />
+        <Questions />
       </main>
       <Footer />
     </div>
