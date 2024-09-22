@@ -37,7 +37,7 @@ export default function Footer() {
               {[
                 { icon: Github, href: 'https://github.com' },
                 { icon: Linkedin, href: 'https://linkedin.com' },
-                { icon: Twitter, href: 'https://twitter.com' },
+                { icon: Twitter, href: 'https://twitter.com' }
               ].map(({ icon: Icon, href }) => (
                 <Link
                   key={href}

@@ -3,7 +3,7 @@ import {
   Banner,
   Questions,
   Feature,
-  Footer,
+  Footer
 } from '@/app/frontend-interview/components'
 
 export default function Home() {

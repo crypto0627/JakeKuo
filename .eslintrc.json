@@ -10,7 +10,19 @@
   ],
   "plugins": ["prettier", "@typescript-eslint", "jest"],
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "none",
+        "semi": false,
+        "useTabs": false,
+        "tabWidth": 2,
+        "bracketSpacing": true,
+        "bracketSameLine": false,
+        "arrowParens": "always"
+      }
+    ],
     "arrow-body-style": "off",
     "prefer-arrow-callback": "off"
   }

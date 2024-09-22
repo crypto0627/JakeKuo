@@ -5,28 +5,28 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 const features = [
   {
     title: 'AI-Powered Assistance',
-    description: 'Get instant help with our advanced AI assistant.',
+    description: 'Get instant help with our advanced AI assistant.'
   },
   {
     title: 'Real-time Collaboration',
-    description: 'Work together seamlessly with your team in real-time.',
+    description: 'Work together seamlessly with your team in real-time.'
   },
   {
     title: 'Customizable Workflows',
-    description: 'Create and customize workflows to fit your unique needs.',
+    description: 'Create and customize workflows to fit your unique needs.'
   },
   {
     title: 'Advanced Analytics',
-    description: 'Gain insights with our powerful analytics tools.',
+    description: 'Gain insights with our powerful analytics tools.'
   },
   {
     title: 'Secure Data Storage',
-    description: 'Your data is safe with our enterprise-grade security.',
+    description: 'Your data is safe with our enterprise-grade security.'
   },
   {
     title: 'Integration Ecosystem',
-    description: 'Connect with your favorite tools and services effortlessly.',
-  },
+    description: 'Connect with your favorite tools and services effortlessly.'
+  }
 ]
 
 export default function Feature() {

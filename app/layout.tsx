@@ -3,26 +3,27 @@ import Head from 'next/head'
 import localFont from 'next/font/local'
 import './globals.css'
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { Providers } from '@/config/SessionProvider'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
   variable: '--font-geist-sans',
-  weight: '100 900',
+  weight: '100 900'
 })
 const geistMono = localFont({
   src: './fonts/GeistMonoVF.woff',
   variable: '--font-geist-mono',
-  weight: '100 900',
+  weight: '100 900'
 })
 
 export const metadata: Metadata = {
   title: 'Jake Kuo - personal website',
   description:
-    'jakekuo-personal website, frontend engineer, resume, portfolio, blockchain',
+    'jakekuo-personal website, frontend engineer, resume, portfolio, blockchain'
 }
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode
 }>) {
@@ -42,9 +43,9 @@ export default function RootLayout({
         <GoogleAnalytics gaId="G-VS5WGZP3LN" />
       </Head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased text-black`}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   )

@@ -11,7 +11,7 @@ const categories = [
   { name: '前端工具', count: 7 },
   { name: '網路安全', count: 5 },
   { name: '效能優化', count: 5 },
-  { name: '前端架構/設計', count: 4 },
+  { name: '前端架構/設計', count: 4 }
 ]
 
 const generateCategoryContent = (category: string, count: number) => {

@@ -18,14 +18,14 @@ import {
   Server,
   Database,
   Network,
-  Wrench,
+  Wrench
 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
 const NavLinks = ({ onClose }: { onClose: () => void }) => (
   <>
-    {['blog', 'frontend-interview'].map((section) => (
+    {['task-manager', 'frontend-interview'].map((section) => (
       <a
         key={section}
         href={`/${section}`}
@@ -44,10 +44,10 @@ const SocialIcons = () => (
       { href: 'https://github.com/crypto0627', Icon: Github },
       {
         href: 'https://www.linkedin.com/in/lai-hung-kuo-83b186245/',
-        Icon: Linkedin,
+        Icon: Linkedin
       },
       { href: 'https://www.instagram.com/klhong_0627/', Icon: Instagram },
-      { href: 'https://t.me/JakeKuo', Icon: Send },
+      { href: 'https://t.me/JakeKuo', Icon: Send }
     ].map(({ href, Icon }) => (
       <div
         key={href}
@@ -65,7 +65,7 @@ const Section = ({
   id,
   title,
   Icon,
-  children,
+  children
 }: {
   id: string
   title: string
@@ -87,7 +87,7 @@ const Section = ({
   )
 }
 
-export default function Component() {
+export default function Resume() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
