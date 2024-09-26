@@ -20,6 +20,7 @@ import {
   Network,
   Wrench
 } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 const NavLinks = ({ onClose }: { onClose: () => void }) => (
@@ -126,10 +127,13 @@ export default function Resume() {
         {/* Profile */}
         <Section id="profile" title="Profile" Icon={Leaf}>
           <div className="flex flex-col md:flex-row items-center">
-            <img
+            <Image
               src="/profile.webp"
               alt="Jake Kuo"
+              width={150}
+              height={150}
               className="rounded-xl mb-4 md:mb-0 md:mr-6 w-auto h-auto"
+              priority={true}
             />
             <div>
               <h1 className="text-3xl font-bold mb-2">Jake Kuo</h1>
