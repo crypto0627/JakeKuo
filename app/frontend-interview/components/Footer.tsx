@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { BrainCircuit, Github, Linkedin, Twitter } from 'lucide-react'
+import { BrainCircuit, Github, Linkedin } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -12,32 +12,18 @@ export default function Footer() {
               Master FE AI
             </h3>
             <p className="text-sm text-gray-300">
-              Empowering frontend developers with AI-powered learning and
-              interview preparation.
+              Frontend interview questions and notes for the demander.
             </p>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              {['About', 'Features', 'Pricing', 'Blog'].map((item) => (
-                <li key={item}>
-                  <Link
-                    href={`/${item.toLowerCase()}`}
-                    className="text-gray-300 hover:text-white transition-colors"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
           <div>
             <h3 className="text-lg font-semibold mb-4">Connect</h3>
             <div className="flex space-x-4">
               {[
-                { icon: Github, href: 'https://github.com' },
-                { icon: Linkedin, href: 'https://linkedin.com' },
-                { icon: Twitter, href: 'https://twitter.com' }
+                { icon: Github, href: 'https://github.com/crypto0627' },
+                {
+                  icon: Linkedin,
+                  href: 'https://www.linkedin.com/in/lai-hung-kuo-83b186245'
+                }
               ].map(({ icon: Icon, href }) => (
                 <Link
                   key={href}
@@ -54,22 +40,8 @@ export default function Footer() {
         </div>
         <div className="mt-8 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-gray-300">
-            © {new Date().getFullYear()} Master FE AI. All rights reserved.
+            © {new Date().getFullYear()} Master FE. All rights reserved.
           </p>
-          <div className="mt-4 md:mt-0">
-            <Link
-              href="/privacy"
-              className="text-sm text-gray-300 hover:text-white mr-4 transition-colors"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/terms"
-              className="text-sm text-gray-300 hover:text-white transition-colors"
-            >
-              Terms of Service
-            </Link>
-          </div>
         </div>
       </div>
     </footer>

@@ -1,7 +1,20 @@
 'use client'
 import { useState } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
-
+// import {
+//   Basic,
+//   JavaScript,
+//   HTML,
+//   CSS,
+//   Reactjs,
+//   Nextjs,
+//   Browser,
+//   TypeScript,
+//   DevTools,
+//   Security,
+//   Performance,
+//   Design
+// } from '../contents/content'
 const categories = [
   { name: 'JavaScript', count: 34 },
   { name: 'HTML', count: 4 },
