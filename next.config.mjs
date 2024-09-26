@@ -2,8 +2,8 @@
 const nextConfig = {
   output: 'export',
   images: {
-    domains: ['jakekuo.com'],
-  },
+    domains: ['www.jakekuo.com']
+  }
 }
 
 export default nextConfig
