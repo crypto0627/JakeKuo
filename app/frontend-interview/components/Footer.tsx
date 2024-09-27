@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-xl font-semibold mb-4 flex items-center">
               <BrainCircuit className="h-6 w-6 mr-2" />
-              Master FE AI
+              Master FE
             </h3>
             <p className="text-sm text-gray-300">
               Frontend interview questions and notes for the demander.
