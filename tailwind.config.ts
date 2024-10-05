@@ -57,7 +57,10 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)'
       },
       backgroundImage: {
-        banner: "url('/master-trip/bg-banner.webp')"
+        banner: "url('/master-trip/bg-banner.webp')",
+        cn: "url('/master-trip/cn.png')",
+        jp: "url('/master-trip/jp.png')",
+        kr: "url('/master-trip/kr.png')"
       }
     }
   },
