@@ -25,16 +25,18 @@ import Link from 'next/link'
 
 const NavLinks = ({ onClose }: { onClose: () => void }) => (
   <>
-    {['words', 'task-manager', 'frontend-interview'].map((section) => (
-      <a
-        key={section}
-        href={`/${section}`}
-        className="block py-2 hover:text-green-200"
-        onClick={onClose}
-      >
-        {section.charAt(0).toUpperCase() + section.slice(1)}
-      </a>
-    ))}
+    {['master-trip', 'words', 'task-manager', 'frontend-interview'].map(
+      (section) => (
+        <a
+          key={section}
+          href={`/${section}`}
+          className="block py-2 hover:text-green-200"
+          onClick={onClose}
+        >
+          {section.charAt(0).toUpperCase() + section.slice(1)}
+        </a>
+      )
+    )}
   </>
 )
 

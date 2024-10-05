@@ -58,7 +58,7 @@ export default function FlashcardApp() {
   )
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 bg-white">
       <h1 className="text-2xl font-bold mb-4">英語單字卡應用</h1>
       <FlashcardForm onSubmit={addFlashcard} />
       <div className="mt-8">
