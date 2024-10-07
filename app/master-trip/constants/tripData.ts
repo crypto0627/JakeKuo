@@ -1,223 +1,215 @@
-import {
-  FaPlane,
-  FaHotel,
-  FaUmbrellaBeach,
-  FaCamera,
-  FaUtensils
-} from 'react-icons/fa'
-
 // Ticket
-export const ticketChinaData = [
-  {
-    id: 1,
-    name: 'free',
-    description: 'free',
-    imageSrc: 'free',
-    link: 'free'
-  }
-]
-
-export const ticketJapanData = [
-  {
-    id: 1,
-    name: 'Shibuya sky',
-    description: 'Shibuya sky ticket link',
-    imageSrc: '/master-trip/shibuya.webp',
-    link: 'https://www.klook.com/zh-TW/activity/70672-shibuya-sky-tokyo/'
-  },
-  {
-    id: 2,
-    name: 'Teamlab Plants & 萬葉俱樂部溫泉',
-    description: 'Teamlab Plants & 萬葉俱樂部溫泉套票',
-    imageSrc: '/master-trip/teamlab_plants.webp',
-    link: 'https://www.klook.com/zh-TW/activity/25300-teamlab-planets-toyosu-tokyo-ticket/'
-  }
-]
-
-// Schedules
-export const schedulesChina = {
-  'Day 1': [{ time: '', activity: 'Free day' }],
-  'Day 2': [{ time: '', activity: 'Free day' }],
-  'Day 3': [{ time: '', activity: 'Free day' }],
-  'Day 4': [{ time: '', activity: 'Free day' }],
-  'Day 5': [{ time: '', activity: 'Free day' }]
-}
-
-export const schedulesJapan = {
-  'Day 1': [
+export const ticketData = {
+  China: [
     {
-      time: '05:50 AM - 08:50 AM',
-      activity: '08:50 AM 桃園國際機場出境'
-    },
-    {
-      time: '08:50 AM - 12:55 PM',
-      activity: 'Flight from 桃園國際機場 to 東京成田機場'
-    },
-    {
-      time: '12:55 PM - 01:55 PM',
-      activity: 'Arrive at Tokyo'
-    },
-    { time: '01:55 PM - 03:00 PM', activity: 'Check in at 新宿御宛APA' },
-    { time: '03:00 PM - 06:30 PM', activity: '涉谷Sky' },
-    { time: '07:00 PM - 08:30 PM', activity: 'Dinner at 涉谷敘敘苑燒肉' },
-    {
-      time: '08:30 PM - 10:30 PM',
-      activity: 'Walk at 新宿歌舞伎町'
+      id: 1,
+      name: 'free',
+      description: 'free',
+      imageSrc: '/test.webp',
+      link: 'free'
     }
   ],
-  'Day 2': [
-    { time: '08:30 AM - 09:30 AM', activity: 'Arrive at 豐洲市場' },
-    { time: '09:30 AM - 10:30 AM', activity: 'Eat brunch at 豐洲市場' },
-    { time: '10:30 AM - 12:30 PM', activity: 'Shop at 豐洲千客萬來' },
+  Japan: [
     {
-      time: '12:30 PM - 03:30 PM',
-      activity:
-        '年輕人逛豐洲teamLab Planets(需預約) 老人家逛Mitsui Shopping Park LaLaport都市船塢豐洲'
+      id: 1,
+      name: 'Shibuya sky',
+      description: 'Shibuya sky ticket link',
+      imageSrc: '/master-trip/shibuya.webp',
+      link: 'https://www.klook.com/zh-TW/activity/70672-shibuya-sky-tokyo/'
     },
     {
-      time: '03:30 PM - 06:30 PM',
-      activity: 'Visit 台場海濱公園 鋼彈 自由女神像 台場夜景 彩虹大橋'
-    },
-    { time: '06:30 PM - 07:30 PM', activity: 'Dinner at 台場' },
-    { time: '07:30 PM - 08:30 PM', activity: 'Return to 新宿APA Hotel' }
-  ],
-  'Day 3': [
-    { time: '09:30 AM - 10:30 AM', activity: 'Eat brunch at 新宿' },
-    {
-      time: '10:30 AM - 10:45 PM',
-      activity: 'Travel by 山手線 from 新宿 to 惠比壽'
-    },
-    {
-      time: '10:45 AM - 11:45 AM',
-      activity: 'Transfer train from 惠比壽 to 鎌倉'
-    },
-    {
-      time: '11:45 AM - 01:30 PM',
-      activity: '江之島大都會酒店放行李 附近吃午餐'
-    },
-    { time: '01:30 PM - 02:30 PM', activity: 'Lunch at 江之島' }
-  ],
-  'Day 4': [
-    {
-      time: '08:00 AM - 10:30 AM',
-      activity: '鎌倉大都會大酒店 to 鎌倉高校前'
-    },
-    {
-      time: '10:30 AM - 01:30 PM',
-      activity: '鎌倉高校前 visit (SLAM DANK 平交道, 七里濱美景咖啡)'
-    },
-    { time: '01:30 PM - 02:30 PM', activity: 'Visit 長谷寺' },
-    { time: '02:30 PM - 05:00 PM', activity: 'Visit 鎌倉大佛, 鶴岡八幡宮' },
-    {
-      time: '05:00 PM - 06:00 PM',
-      activity: 'Free time, 鎌倉大都會大酒店 dinner'
+      id: 2,
+      name: 'Teamlab Plants & 萬葉俱樂部溫泉',
+      description: 'Teamlab Plants & 萬葉俱樂部溫泉套票',
+      imageSrc: '/master-trip/teamlab_plants.webp',
+      link: 'https://www.klook.com/zh-TW/activity/25300-teamlab-planets-toyosu-tokyo-ticket/'
     }
-  ],
-  'Day 5': [
-    { time: '08:00 AM - 10:30 AM', activity: '鎌倉大都會大酒店 to 江島神社' },
-    { time: '10:30 AM - 11:00 AM', activity: '江之島海蠟燭展望燈塔 visit' },
-    { time: '11:00 AM - 01:00 PM', activity: 'Visit 江之島岩屋' },
-    { time: '01:00 PM - 02:30 PM', activity: 'Lunch at 江之島' },
-    { time: '02:30 PM - 03:30 PM', activity: 'Visit 新江之島水族館' },
-    { time: '03:30 PM - 04:30 PM', activity: 'Return to 鎌倉大都會大酒店' },
-    { time: '04:30 PM - 06:00 PM', activity: 'Dinner at hotel' }
   ]
 }
 
-export const ChinaDaily = [
-  'Day 1',
-  'Day 2',
-  'Day 3',
-  'Day 4',
-  'Day 5',
-  'Day 6',
-  'Day 7'
-]
+// Schedules
+const createSchedule = (activities: [string, string][]) =>
+  activities.map(([time, activity]) => ({ time, activity }))
 
-export const JapanDaily = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5']
+export const schedules: {
+  [country: string]: {
+    [day: string]: { time: string; activity: string }[]
+  }
+} = {
+  China: {
+    'Day 1': [{ time: '', activity: 'Free day' }],
+    'Day 2': [{ time: '', activity: 'Free day' }],
+    'Day 3': [{ time: '', activity: 'Free day' }],
+    'Day 4': [{ time: '', activity: 'Free day' }],
+    'Day 5': [{ time: '', activity: 'Free day' }]
+  },
+  Japan: {
+    'Day 1': createSchedule([
+      ['05:50 AM - 08:50 AM', '08:50 AM 桃園國際機場出境'],
+      ['08:50 AM - 12:55 PM', 'Flight from 桃園國際機場 to 東京成田機場'],
+      ['12:55 PM - 01:55 PM', 'Arrive at Tokyo'],
+      ['01:55 PM - 03:00 PM', 'Check in at 新宿御宛APA'],
+      ['03:00 PM - 06:00 PM', '新宿 → 銀座逛街 UNIQLO 銀座店 HARBS下午茶'],
+      ['06:30 PM - 08:30 PM', 'Dinner at 新宿餃子の福包'],
+      ['08:30 PM - 10:30 PM', 'Walk at 新宿歌舞伎町']
+    ]),
+    'Day 2': createSchedule([
+      ['08:30 AM - 09:30 AM', 'Arrive at 豐洲市場'],
+      ['09:30 AM - 10:30 AM', 'Eat brunch at 豐洲市場'],
+      ['10:30 AM - 12:30 PM', 'Shop at 豐洲千客萬來'],
+      [
+        '12:30 PM - 03:30 PM',
+        '想看酷炫的景→豐洲teamLab Planets(需預約) 想逛街→Mitsui Shopping Park LaLaport都市船塢豐洲或泡湯'
+      ],
+      [
+        '03:30 PM - 06:30 PM',
+        'Visit 台場海濱公園 鋼彈 自由女神像 台場夜景 彩虹大橋'
+      ],
+      ['06:30 PM - 07:30 PM', 'Dinner at 台場'],
+      ['07:30 PM - 08:30 PM', 'Return to 新宿御宛APA Hotel']
+    ]),
+    'Day 3': createSchedule([
+      ['09:30 AM - 10:30 AM', 'Eat breakfast at 新宿'],
+      ['10:30 AM - 12:00 PM', '涉谷Sky'],
+      ['12:00 PM - 02:00 PM', '涉谷敘敘苑燒肉'],
+      ['02:00 PM - 05:00 PM', '涉谷逛街 不想逛街可以去明治神宮和表參道'],
+      ['05:00 PM - 06:30 PM', 'Dinner at 新宿']
+    ]),
+    'Day 4': createSchedule([
+      ['09:30 AM - 10:30 AM', '新宿APA Hotel to 鎌倉站 鎌倉大酒店放行李'],
+      ['10:30 AM - 01:30 PM', '鎌倉高校前 (SLAM DANK 平交道, 七里濱美景咖啡)'],
+      ['01:30 PM - 02:30 PM', '長谷寺'],
+      ['02:30 PM - 05:00 PM', '鎌倉大佛, 鶴岡八幡宮'],
+      ['05:00 PM - 06:00 PM', 'Free time, 鎌倉大都會大酒店 dinner']
+    ]),
+    'Day 5': createSchedule([
+      ['08:00 AM - 10:30 AM', '鎌倉大都會大酒店 to 江島神社'],
+      ['10:30 AM - 11:00 AM', '江之島海蠟燭展望燈塔 visit'],
+      ['11:00 AM - 01:00 PM', 'Visit 江之島岩屋'],
+      ['01:00 PM - 02:30 PM', 'Lunch at 江之島'],
+      ['02:30 PM - 03:30 PM', 'Visit 新江之島水族館'],
+      ['03:30 PM - 04:30 PM', 'Return to 鎌倉大都會大酒店'],
+      ['04:30 PM - 06:00 PM', 'Dinner at hotel']
+    ]),
+    'Day 6': createSchedule([
+      ['08:30 AM - 09:30 AM', 'Check out 鎌倉大都會大酒店'],
+      ['09:30 AM - 12:00 AM', '鎌倉站 → 成田機場'],
+      ['15:00 PM', '飛機起飛返台']
+    ])
+  }
+}
 
-export const activities = [
-  { name: 'Flight', icon: FaPlane },
-  { name: 'Check-in Hotel', icon: FaHotel },
-  { name: 'Beach Time', icon: FaUmbrellaBeach },
-  { name: 'Sightseeing', icon: FaCamera },
-  { name: 'Dinner', icon: FaUtensils }
-]
+export const dailySchedule = {
+  China: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+  Japan: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6']
+}
 
 // Transportation
-export const transportJapanData = [
-  {
-    id: 1,
-    name: '成田機場到新宿APA Hotel',
-    description: '成田機場第一航廈(成田特快) → 新宿',
-    link: 'https://www.klook.com/zh-TW/rails-32/1012-japan/route-1336/naritaairportterminalo-to-shinjuku-trains/'
-  },
-  {
-    id: 2,
-    name: '新宿APA Hotel到Shibuya Sky',
-    description: '搭乘副都心線 新宿三丁目站-> 澀谷站'
-  },
-  {
-    id: 3,
-    name: '新宿APA Hotel到豐洲市場',
-    description: '搭乘新宿線 新宿三丁目站 -> 市谷站轉乘 有樂町線 -> 豐洲站'
-  },
-  {
-    id: 4,
-    name: '豐洲到台場',
-    description: '搭乘海鷗線 豐洲站 -> 台場站'
-  },
-  {
-    id: 5,
-    name: '台場到新宿APA Hotel',
-    description: 'Organic and plant-based dishes'
-  },
-  {
-    id: 6,
-    name: '新宿APA Hotel到鎌倉大都會酒店',
-    description: 'Organic and plant-based dishes'
-  }
-]
-
-export const transportChinaData = [
-  {
-    id: 1,
-    name: '上海浦東機場到全季酒店(南京東路店)',
-    description: '上海浦東機場地鐵 → 南京東路站',
-    link: 'https://www.klook.com/zh-TW/rails-32/1012-japan/route-1336/naritaairportterminalo-to-shinjuku-trains/'
-  }
-]
+export const transportData = {
+  Japan: [
+    {
+      id: 1,
+      day: 'Day 1',
+      name: '成田機場到新宿APA Hotel',
+      description: '成田機場第一航廈(成田特快) → 新宿',
+      link: 'https://www.klook.com/zh-TW/rails-32/1012-japan/route-1336/naritaairportterminalo-to-shinjuku-trains/'
+    },
+    {
+      id: 2,
+      day: 'Day 1',
+      name: '新宿APA Hotel到銀座站',
+      description: '搭乘丸之內線 新宿御苑前站 → 銀座站'
+    },
+    {
+      id: 3,
+      day: 'Day 1',
+      name: '銀座站到新宿APA Hotel',
+      description: '搭乘丸之內線 銀座站 → 新宿御苑前站'
+    },
+    {
+      id: 4,
+      day: 'Day 2',
+      name: '新宿APA Hotel到豐洲站',
+      description: '搭乘新宿線 新宿御苑前站 → 市谷站轉乘有樂町線 → 豐洲站'
+    },
+    {
+      id: 5,
+      day: 'Day 2',
+      name: '豐洲站到台場',
+      description: '搭乘海鷗線 豐洲站 → 台場站'
+    },
+    {
+      id: 6,
+      day: 'Day 2',
+      name: '台場到新宿APA Hotel',
+      description: '搭乘海鷗線 台場站 → 新宿站'
+    },
+    {
+      id: 7,
+      day: 'Day 3',
+      name: '新宿到涉谷',
+      description: '搭乘副都心線 新宿三丁目站 → 涉谷站'
+    },
+    {
+      id: 8,
+      day: 'Day 3',
+      name: '涉谷到新宿',
+      description: '搭乘副都心線 涉谷站 → 新宿三丁目站'
+    },
+    {
+      id: 9,
+      day: 'Day 3',
+      name: '新宿到鎌倉',
+      description: '搭乘JR湘南新宿線 新宿站 → 鎌倉站'
+    },
+    { id: 10, day: 'Day 3', name: '鎌倉周遊', description: '鎌倉周遊券' },
+    { id: 11, day: 'Day 4', name: '鎌倉周遊', description: '鎌倉周遊券' },
+    { id: 12, day: 'Day 5', name: '鎌倉周遊', description: '鎌倉周遊券' },
+    { id: 13, day: 'Day 6', name: '鎌倉到成田機場', description: '包車前往' }
+  ],
+  China: [
+    {
+      id: 1,
+      day: 'Day 1',
+      name: '上海浦東機場到全季酒店(南京東路店)',
+      description: '上海浦東機場地鐵 → 南京東路站',
+      link: 'https://www.klook.com/zh-TW/rails-32/1012-japan/route-1336/naritaairportterminalo-to-shinjuku-trains/'
+    }
+  ]
+}
 
 // Cuisine
-export const cuisineChinaData = [
-  {
-    id: 1,
-    name: 'Shibuya敘敘苑燒肉',
-    description: '敘敘苑預約鏈接',
-    imageSrc: '/master-trip/shushuyuan.webp',
-    link: 'https://www.jojoen.co.jp/cn/'
-  },
-  {
-    id: 2,
-    name: '新宿 餃子の福包',
-    description: '餃子の福包',
-    imageSrc: '/master-trip/chaochifubao.webp',
-    link: 'https://maps.app.goo.gl/bNcsCTcv9JW7kcKs6'
-  }
-]
-export const cuisineJapanData = [
-  {
-    id: 1,
-    name: 'Shibuya敘敘苑燒肉',
-    description: '敘敘苑預約鏈接',
-    imageSrc: '/master-trip/shushuyuan.webp',
-    link: 'https://www.jojoen.co.jp/cn/'
-  },
-  {
-    id: 2,
-    name: '新宿 餃子の福包',
-    description: '餃子の福包',
-    imageSrc: '/master-trip/chaochifubao.webp',
-    link: 'https://maps.app.goo.gl/bNcsCTcv9JW7kcKs6'
-  }
-]
+export const cuisineData = {
+  China: [
+    {
+      id: 1,
+      name: 'Shibuya敘敘苑燒肉',
+      description: '敘敘苑預約鏈接',
+      imageSrc: '/master-trip/shushuyuan.webp',
+      link: 'https://www.jojoen.co.jp/cn/'
+    },
+    {
+      id: 2,
+      name: '新宿 餃子の福包',
+      description: '餃子の福包',
+      imageSrc: '/master-trip/chaochifubao.webp',
+      link: 'https://maps.app.goo.gl/bNcsCTcv9JW7kcKs6'
+    }
+  ],
+  Japan: [
+    {
+      id: 1,
+      name: 'Shibuya敘敘苑燒肉',
+      description: '敘敘苑預約鏈接',
+      imageSrc: '/master-trip/shushuyuan.webp',
+      link: 'https://www.jojoen.co.jp/cn/'
+    },
+    {
+      id: 2,
+      name: '新宿 餃子の福包',
+      description: '餃子の福包',
+      imageSrc: '/master-trip/chaochifubao.webp',
+      link: 'https://maps.app.goo.gl/bNcsCTcv9JW7kcKs6'
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card'
-import { useEffect, useState } from 'react'
+import { useMemo } from 'react'
 import { CountryButton } from './countrybtn'
 import { FlightDetails } from './flightdetails'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,8 +8,6 @@ import { RootState } from '@/lib/store'
 import { setCountry } from '@/lib/store/countrySlice'
 
 export function FlightInfo() {
-  const [countrySelected, setCountrySelected] = useState<string>('China')
-
   const dispatch = useDispatch()
   const selectedCountry = useSelector(
     (state: RootState) => state.country.selectedCountry
@@ -19,37 +17,26 @@ export function FlightInfo() {
     dispatch(setCountry(country))
   }
 
-  const Country = useSelector(
-    (state: RootState) => state.country.selectedCountry
-  )
-
-  useEffect(() => {
-    if (Country === 'China' || Country === 'Japan') {
-      setCountrySelected(Country)
-    }
-  }, [Country])
+  const FlightInfoComponent = useMemo(() => {
+    return selectedCountry === 'China' ? (
+      <ChinaFlightInfo />
+    ) : (
+      <JapanFlightInfo />
+    )
+  }, [selectedCountry])
 
   return (
     <Card className="w-full max-w-3xl mx-auto -mt-16 z-10 bg-white shadow-lg">
       <div className="flex items-center gap-2 bg-gray-100 p-1 rounded-lg">
-        <CountryButton
-          isSelected={countrySelected === 'China'}
-          onClick={() => {
-            setCountrySelected('China')
-            handleCountryChange('China')
-          }}
-        >
-          China
-        </CountryButton>
-        <CountryButton
-          isSelected={countrySelected === 'Japan'}
-          onClick={() => {
-            setCountrySelected('Japan')
-            handleCountryChange('Japan')
-          }}
-        >
-          Japan
-        </CountryButton>
+        {['China', 'Japan'].map((country) => (
+          <CountryButton
+            key={country}
+            isSelected={selectedCountry === country}
+            onClick={() => handleCountryChange(country)}
+          >
+            {country}
+          </CountryButton>
+        ))}
       </div>
       <CardContent className="p-6">
         <AnimatePresence mode="wait">
@@ -60,11 +47,7 @@ export function FlightInfo() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {countrySelected === 'China' ? (
-              <ChinaFlightInfo />
-            ) : (
-              <JapanFlightInfo />
-            )}
+            {FlightInfoComponent}
           </motion.div>
         </AnimatePresence>
       </CardContent>

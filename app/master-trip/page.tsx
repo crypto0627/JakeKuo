@@ -55,14 +55,14 @@ export default function MasterTrip() {
           <Schedule />
         </section>
 
-        {/* Ticket */}
-        <section id="ticket" className="my-24 lg:my-0">
-          <Ticket />
-        </section>
-
         {/* Transportation */}
         <section id="transportation" className="my-24 lg:my-0">
           <Transportation />
+        </section>
+
+        {/* Ticket */}
+        <section id="ticket" className="my-24 lg:my-0">
+          <Ticket />
         </section>
 
         {/* Cuisine */}

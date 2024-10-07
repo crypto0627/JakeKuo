@@ -1,71 +1,73 @@
 'use client'
 import { useCallback, useState } from 'react'
 
-const NavLists = [
-  { title: 'schedule', link: 'schedule' },
-  { title: 'ticket', link: 'ticket' },
-  { title: 'transportation', link: 'transportation' },
-  { title: 'cuisine', link: 'cuisine' }
+const NAV_ITEMS = [
+  { title: 'Schedule', link: 'schedule' },
+  { title: 'Ticket', link: 'ticket' },
+  { title: 'Transportation', link: 'transportation' },
+  { title: 'Cuisine', link: 'cuisine' }
 ]
+
 const NavLinks = ({ onClose }: { onClose: () => void }) => {
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
       e.preventDefault()
       onClose()
-      const element = document.getElementById(id)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
     },
     [onClose]
   )
 
   return (
     <>
-      {NavLists.map((item, index) => (
+      {NAV_ITEMS.map(({ title, link }) => (
         <a
-          key={index}
-          href={`#${item.link}`}
+          key={link}
+          href={`#${link}`}
           className="block py-2 hover:text-green-200"
-          onClick={(e) => handleClick(e, item.link)}
+          onClick={(e) => handleClick(e, link)}
         >
-          {item.title}
+          {title}
         </a>
       ))}
     </>
   )
 }
+
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
+
   return (
-    <nav className="text-white p-4 absolute top-0 left-0 right-0 z-10">
-      <div className="container mx-auto flex justify-between items-center">
-        <span className="text-2xl font-bold">Master Trip</span>
-        <div className="hidden md:flex space-x-4">
-          <NavLinks onClose={() => {}} />
+    <header className="absolute top-0 left-0 right-0 z-10">
+      <nav className="text-white p-4">
+        <div className="container mx-auto flex justify-between items-center">
+          <h1 className="text-2xl font-bold">Master Trip</h1>
+          <div className="hidden md:flex space-x-4">
+            <NavLinks onClose={() => {}} />
+          </div>
+          <button
+            className="md:hidden text-white focus:outline-none w-8 h-8 relative"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMenuOpen}
+          >
+            <span
+              className={`block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out ${isMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-2'}`}
+            />
+            <span
+              className={`block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}
+            />
+            <span
+              className={`block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out ${isMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-2'}`}
+            />
+          </button>
         </div>
-        <button
-          className="md:hidden text-white focus:outline-none w-8 h-8 relative"
-          onClick={toggleMenu}
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+        <div
+          className={`md:hidden transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-96 opacity-100 pt-4' : 'max-h-0 opacity-0 overflow-hidden'}`}
         >
-          <span
-            className={`block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out ${isMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-2'}`}
-          />
-          <span
-            className={`block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}
-          />
-          <span
-            className={`block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out ${isMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-2'}`}
-          />
-        </button>
-      </div>
-      <div
-        className={`md:hidden transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-96 opacity-100 pt-4' : 'max-h-0 opacity-0 overflow-hidden'}`}
-      >
-        <NavLinks onClose={() => setIsMenuOpen(false)} />
-      </div>
-    </nav>
+          <NavLinks onClose={() => setIsMenuOpen(false)} />
+        </div>
+      </nav>
+    </header>
   )
 }

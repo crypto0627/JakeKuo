@@ -12,36 +12,36 @@ export function FlightDetails({
   arrival
 }: FlightDetailsProps) {
   return (
-    <>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <Plane className="h-8 w-8 text-blue-500" />
+    <article className="flight-details">
+      <header className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <Plane aria-hidden="true" className="h-8 w-8 text-blue-500" />
           <div>
-            <h3 className="text-lg font-semibold">Flight to {destination}</h3>
+            <h2 className="text-lg font-semibold">Flight to {destination}</h2>
             <p className="text-sm text-gray-500">
               {flightNumber} • {airline}
             </p>
           </div>
         </div>
-        <div className="text-right">
-          <p className="text-lg font-semibold">{departureTime}</p>
-          <p className="text-sm text-gray-500">{departureDate}</p>
-        </div>
-      </div>
-      <div className="mt-4 flex justify-between text-sm">
+        <time className="text-right">
+          <span className="block text-lg font-semibold">{departureTime}</span>
+          <span className="block text-sm text-gray-500">{departureDate}</span>
+        </time>
+      </header>
+      <footer className="mt-4 flex justify-between text-sm">
         <div>
-          <p className="font-semibold">From</p>
+          <h3 className="font-semibold">From</h3>
           <p>{origin}</p>
         </div>
         <div className="text-center">
-          <p className="font-semibold">Duration</p>
+          <h3 className="font-semibold">Duration</h3>
           <p>{duration}</p>
         </div>
         <div className="text-right">
-          <p className="font-semibold">To</p>
+          <h3 className="font-semibold">To</h3>
           <p>{arrival}</p>
         </div>
-      </div>
-    </>
+      </footer>
+    </article>
   )
 }
