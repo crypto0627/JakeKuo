@@ -7,23 +7,7 @@ import { CountryButton } from './countrybtn'
 import { setCountry } from '@/lib/store/countrySlice'
 import Image from 'next/image'
 import Link from 'next/link'
-
-const cuisineData = [
-  {
-    id: 1,
-    name: 'Shibuya敘敘苑燒肉',
-    description: '敘敘苑預約鏈接',
-    imageSrc: '/master-trip/shushuyuan.webp',
-    link: 'https://www.jojoen.co.jp/cn/'
-  },
-  {
-    id: 2,
-    name: '新宿 餃子の福包',
-    description: '餃子の福包',
-    imageSrc: '/master-trip/chaochifubao.webp',
-    link: 'https://maps.app.goo.gl/bNcsCTcv9JW7kcKs6'
-  }
-]
+import { cuisineChinaData, cuisineJapanData } from '../constants/tripData'
 
 export function Cuisine() {
   const [countrySelected, setCountrySelected] = useState<string>('China')
@@ -85,43 +69,95 @@ export function Cuisine() {
             </div>
           </div>
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {cuisineData.map((cuisine) => (
-              <div key={cuisine.id} className="border rounded-lg">
-                {cuisine.link ? (
-                  <Link href={cuisine.link} target="_blank">
-                    <Image
-                      src={cuisine.imageSrc}
-                      width={300}
-                      height={300}
-                      alt={`${cuisine.name} Image`}
-                      className="object-cover w-full h-48 rounded-t-lg"
-                    />
-                    <div className="p-4">
-                      <h3 className="text-lg font-semibold">{cuisine.name}</h3>
-                      <p className="text-muted-foreground">
-                        {cuisine.description}
-                      </p>
-                    </div>
-                  </Link>
-                ) : (
-                  <>
-                    <Image
-                      src={cuisine.imageSrc}
-                      width={300}
-                      height={300}
-                      alt={`${cuisine.name} Image`}
-                      className="object-cover w-full h-48 rounded-t-lg"
-                    />
-                    <div className="p-4">
-                      <h3 className="text-lg font-semibold">{cuisine.name}</h3>
-                      <p className="text-muted-foreground">
-                        {cuisine.description}
-                      </p>
-                    </div>
-                  </>
-                )}
-              </div>
-            ))}
+            {countrySelected === 'China' ? (
+              <>
+                {cuisineChinaData.map((cuisine) => (
+                  <div key={cuisine.id} className="border rounded-lg">
+                    {cuisine.link ? (
+                      <Link href={cuisine.link} target="_blank">
+                        <Image
+                          src={cuisine.imageSrc}
+                          width={300}
+                          height={300}
+                          alt={`${cuisine.name} Image`}
+                          className="object-cover w-full h-48 rounded-t-lg"
+                        />
+                        <div className="p-4">
+                          <h3 className="text-lg font-semibold">
+                            {cuisine.name}
+                          </h3>
+                          <p className="text-muted-foreground">
+                            {cuisine.description}
+                          </p>
+                        </div>
+                      </Link>
+                    ) : (
+                      <>
+                        <Image
+                          src={cuisine.imageSrc}
+                          width={300}
+                          height={300}
+                          alt={`${cuisine.name} Image`}
+                          className="object-cover w-full h-48 rounded-t-lg"
+                        />
+                        <div className="p-4">
+                          <h3 className="text-lg font-semibold">
+                            {cuisine.name}
+                          </h3>
+                          <p className="text-muted-foreground">
+                            {cuisine.description}
+                          </p>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                ))}
+              </>
+            ) : (
+              <>
+                {cuisineJapanData.map((cuisine) => (
+                  <div key={cuisine.id} className="border rounded-lg">
+                    {cuisine.link ? (
+                      <Link href={cuisine.link} target="_blank">
+                        <Image
+                          src={cuisine.imageSrc}
+                          width={300}
+                          height={300}
+                          alt={`${cuisine.name} Image`}
+                          className="object-cover w-full h-48 rounded-t-lg"
+                        />
+                        <div className="p-4">
+                          <h3 className="text-lg font-semibold">
+                            {cuisine.name}
+                          </h3>
+                          <p className="text-muted-foreground">
+                            {cuisine.description}
+                          </p>
+                        </div>
+                      </Link>
+                    ) : (
+                      <>
+                        <Image
+                          src={cuisine.imageSrc}
+                          width={300}
+                          height={300}
+                          alt={`${cuisine.name} Image`}
+                          className="object-cover w-full h-48 rounded-t-lg"
+                        />
+                        <div className="p-4">
+                          <h3 className="text-lg font-semibold">
+                            {cuisine.name}
+                          </h3>
+                          <p className="text-muted-foreground">
+                            {cuisine.description}
+                          </p>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>

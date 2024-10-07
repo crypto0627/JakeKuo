@@ -6,49 +6,7 @@ import { RootState } from '@/lib/store'
 import { CountryButton } from './countrybtn'
 import { setCountry } from '@/lib/store/countrySlice'
 import Link from 'next/link'
-
-const transportJapanData = [
-  {
-    id: 1,
-    name: '成田機場到新宿APA Hotel',
-    description: '成田機場第一航廈(成田特快) → 新宿',
-    link: 'https://www.klook.com/zh-TW/rails-32/1012-japan/route-1336/naritaairportterminalo-to-shinjuku-trains/'
-  },
-  {
-    id: 2,
-    name: '新宿APA Hotel到Shibuya Sky',
-    description: '搭乘副都心線 新宿三丁目站-> 澀谷站'
-  },
-  {
-    id: 3,
-    name: '新宿APA Hotel到豐洲市場',
-    description: '搭乘新宿線 新宿三丁目站 -> 市谷站轉乘 有樂町線 -> 豐洲站'
-  },
-  {
-    id: 4,
-    name: '豐洲到台場',
-    description: '搭乘海鷗線 豐洲站 -> 台場站'
-  },
-  {
-    id: 5,
-    name: '台場到新宿APA Hotel',
-    description: 'Organic and plant-based dishes'
-  },
-  {
-    id: 6,
-    name: '新宿APA Hotel到鎌倉大都會酒店',
-    description: 'Organic and plant-based dishes'
-  }
-]
-
-const transportChinaData = [
-  {
-    id: 1,
-    name: '上海浦東機場到全季酒店(南京東路店)',
-    description: '上海浦東機場地鐵 → 南京東路站',
-    link: 'https://www.klook.com/zh-TW/rails-32/1012-japan/route-1336/naritaairportterminalo-to-shinjuku-trains/'
-  }
-]
+import { transportChinaData, transportJapanData } from '../constants/tripData'
 
 export function Transportation() {
   const [countrySelected, setCountrySelected] = useState<string>('China')

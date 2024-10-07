@@ -7,23 +7,7 @@ import { CountryButton } from './countrybtn'
 import { setCountry } from '@/lib/store/countrySlice'
 import Image from 'next/image'
 import Link from 'next/link'
-
-const ticketData = [
-  {
-    id: 1,
-    name: 'Shibuya sky',
-    description: 'Shibuya sky ticket link',
-    imageSrc: '/master-trip/shibuya.webp',
-    link: 'https://www.klook.com/zh-TW/activity/70672-shibuya-sky-tokyo/'
-  },
-  {
-    id: 2,
-    name: 'Teamlab Plants & 萬葉俱樂部溫泉',
-    description: 'Teamlab Plants & 萬葉俱樂部溫泉套票',
-    imageSrc: '/master-trip/teamlab_plants.webp',
-    link: 'https://www.klook.com/zh-TW/activity/25300-teamlab-planets-toyosu-tokyo-ticket/'
-  }
-]
+import { ticketChinaData, ticketJapanData } from '../constants/tripData'
 
 export function Ticket() {
   const [countrySelected, setCountrySelected] = useState<string>('China')
@@ -85,43 +69,95 @@ export function Ticket() {
             </div>
           </div>
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {ticketData.map((ticket) => (
-              <div key={ticket.id} className="border rounded-lg">
-                {ticket.link ? (
-                  <Link href={ticket.link} target="_blank">
-                    <Image
-                      src={ticket.imageSrc}
-                      width={300}
-                      height={300}
-                      alt={`${ticket.name} Image`}
-                      className="object-cover w-full h-48 rounded-t-lg"
-                    />
-                    <div className="p-4">
-                      <h3 className="text-lg font-semibold">{ticket.name}</h3>
-                      <p className="text-muted-foreground">
-                        {ticket.description}
-                      </p>
-                    </div>
-                  </Link>
-                ) : (
-                  <>
-                    <Image
-                      src={ticket.imageSrc}
-                      width={300}
-                      height={300}
-                      alt={`${ticket.name} Image`}
-                      className="object-cover w-full h-48 rounded-t-lg"
-                    />
-                    <div className="p-4">
-                      <h3 className="text-lg font-semibold">{ticket.name}</h3>
-                      <p className="text-muted-foreground">
-                        {ticket.description}
-                      </p>
-                    </div>
-                  </>
-                )}
-              </div>
-            ))}
+            {countrySelected === 'China' ? (
+              <>
+                {ticketChinaData.map((ticket) => (
+                  <div key={ticket.id} className="border rounded-lg">
+                    {ticket.link ? (
+                      <Link href={ticket.link} target="_blank">
+                        <Image
+                          src={ticket.imageSrc}
+                          width={300}
+                          height={300}
+                          alt={`${ticket.name} Image`}
+                          className="object-cover w-full h-48 rounded-t-lg"
+                        />
+                        <div className="p-4">
+                          <h3 className="text-lg font-semibold">
+                            {ticket.name}
+                          </h3>
+                          <p className="text-muted-foreground">
+                            {ticket.description}
+                          </p>
+                        </div>
+                      </Link>
+                    ) : (
+                      <>
+                        <Image
+                          src={ticket.imageSrc}
+                          width={300}
+                          height={300}
+                          alt={`${ticket.name} Image`}
+                          className="object-cover w-full h-48 rounded-t-lg"
+                        />
+                        <div className="p-4">
+                          <h3 className="text-lg font-semibold">
+                            {ticket.name}
+                          </h3>
+                          <p className="text-muted-foreground">
+                            {ticket.description}
+                          </p>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                ))}
+              </>
+            ) : (
+              <>
+                {ticketJapanData.map((ticket) => (
+                  <div key={ticket.id} className="border rounded-lg">
+                    {ticket.link ? (
+                      <Link href={ticket.link} target="_blank">
+                        <Image
+                          src={ticket.imageSrc}
+                          width={300}
+                          height={300}
+                          alt={`${ticket.name} Image`}
+                          className="object-cover w-full h-48 rounded-t-lg"
+                        />
+                        <div className="p-4">
+                          <h3 className="text-lg font-semibold">
+                            {ticket.name}
+                          </h3>
+                          <p className="text-muted-foreground">
+                            {ticket.description}
+                          </p>
+                        </div>
+                      </Link>
+                    ) : (
+                      <>
+                        <Image
+                          src={ticket.imageSrc}
+                          width={300}
+                          height={300}
+                          alt={`${ticket.name} Image`}
+                          className="object-cover w-full h-48 rounded-t-lg"
+                        />
+                        <div className="p-4">
+                          <h3 className="text-lg font-semibold">
+                            {ticket.name}
+                          </h3>
+                          <p className="text-muted-foreground">
+                            {ticket.description}
+                          </p>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>
