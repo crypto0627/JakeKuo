@@ -1,5 +1,5 @@
 'use client'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { CountryButton } from './countrybtn'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
@@ -12,6 +12,9 @@ import {
   FaCamera,
   FaUtensils
 } from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/lib/store'
+import { setCountry } from '@/lib/store/countrySlice'
 
 const ChinaDaily = [
   'Day 1',
@@ -33,7 +36,7 @@ const activities = [
   { name: 'Dinner', icon: FaUtensils }
 ]
 
-export default function Schedule() {
+export function Schedule() {
   const [selectedCountry, setSelectedCountry] = useState<'China' | 'Japan'>(
     'China'
   )
@@ -44,6 +47,21 @@ export default function Schedule() {
 
   const ref = useRef(null)
   const isInView = useInView(ref, { once: false, amount: 0.3 })
+
+  const dispatch = useDispatch()
+  const handleCountryChange = (country: string) => {
+    dispatch(setCountry(country))
+  }
+
+  const Country = useSelector(
+    (state: RootState) => state.country.selectedCountry
+  )
+
+  useEffect(() => {
+    if (Country === 'China' || Country === 'Japan') {
+      setSelectedCountry(Country)
+    }
+  }, [Country])
 
   return (
     <motion.div
@@ -68,6 +86,7 @@ export default function Schedule() {
                   onClick={() => {
                     setSelectedCountry('China')
                     setSelectedDay('Day 1')
+                    handleCountryChange('China')
                   }}
                 >
                   China
@@ -77,6 +96,7 @@ export default function Schedule() {
                   onClick={() => {
                     setSelectedCountry('Japan')
                     setSelectedDay('Day 1')
+                    handleCountryChange('Japan')
                   }}
                 >
                   Japan
@@ -114,12 +134,12 @@ function ChinaSchedule({ day }: { day: string }) {
   const schedules = {
     'Day 1': [
       {
-        time: '05:50 AM - 08:50 AM',
-        activity: 'Travel from 台北萬華 to 桃園國際機場'
+        time: '09:00 AM',
+        activity: '桃園機場集合'
       },
       {
-        time: '08:50 AM - 12:55 PM',
-        activity: 'Flight from 桃園國際機場 to 東京成田機場'
+        time: '11:30 AM - 13:55 PM',
+        activity: 'Flight from 桃園國際機場 to 上海浦東機場'
       },
       {
         time: '12:55 PM - 01:55 PM',
@@ -197,7 +217,7 @@ function JapanSchedule({ day }: { day: string }) {
     'Day 1': [
       {
         time: '05:50 AM - 08:50 AM',
-        activity: 'Travel from 台北萬華 to 桃園國際機場'
+        activity: '08:50 AM 桃園國際機場出境'
       },
       {
         time: '08:50 AM - 12:55 PM',
@@ -205,12 +225,47 @@ function JapanSchedule({ day }: { day: string }) {
       },
       {
         time: '12:55 PM - 01:55 PM',
-        activity: 'Arrive at Tokyo, customs clearance'
+        activity: 'Arrive at Tokyo'
       },
-      { time: '01:55 PM onwards', activity: 'Check in at 新宿御宛APA' }
+      { time: '01:55 PM - 03:00 PM', activity: 'Check in at 新宿御宛APA' },
+      { time: '03:00 PM - 06:30 PM', activity: '涉谷Sky' },
+      { time: '07:00 PM - 08:30 PM', activity: 'Dinner at 涉谷敘敘院燒肉' },
+      {
+        time: '08:30 PM - 10:30 PM',
+        activity: 'Walk at 新宿歌舞伎町'
+      }
     ],
-    'Day 2': [{ time: '', activity: 'Free day' }],
-    'Day 3': [{ time: '', activity: 'Free day' }],
+    'Day 2': [
+      { time: '08:30 AM - 09:30 AM', activity: 'Arrive at 豐洲市場' },
+      { time: '09:30 AM - 10:30 AM', activity: 'Eat brunch at 豐洲市場' },
+      { time: '10:30 AM - 03:30 PM', activity: 'Shop at 豐洲千客萬來' },
+      {
+        time: '02:30 PM - 04:30 PM',
+        activity: 'Visit 豐洲teamLab Planets(需預約)'
+      },
+      { time: '04:30 PM - 06:30 PM', activity: '萬葉俱樂部泡湯(需預約)' },
+      {
+        time: '06:30 PM - 08:30 PM',
+        activity: 'Visit 台場海濱公園 鋼彈 自由女神像 台場夜景 彩虹大橋'
+      },
+      { time: '08:30 PM - 09:30 PM', activity: 'Return to 新宿APA Hotel' }
+    ],
+    'Day 3': [
+      { time: '09:30 AM - 10:30 AM', activity: 'Eat brunch at 新宿' },
+      {
+        time: '10:30 AM - 10:45 PM',
+        activity: 'Travel by 山手線 from 新宿 to 惠比壽'
+      },
+      {
+        time: '10:45 AM - 11:45 AM',
+        activity: 'Transfer train from 惠比壽 to 鎌倉'
+      },
+      {
+        time: '11:45 AM - 01:30 PM',
+        activity: '江之島大都會酒店放行李 附近吃午餐'
+      },
+      { time: '01:30 PM - 02:30 PM', activity: 'Lunch at 江之島' }
+    ],
     'Day 4': [
       {
         time: '08:00 AM - 10:30 AM',
