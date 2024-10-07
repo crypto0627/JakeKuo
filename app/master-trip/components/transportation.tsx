@@ -7,7 +7,7 @@ import { CountryButton } from './countrybtn'
 import { setCountry } from '@/lib/store/countrySlice'
 import Link from 'next/link'
 
-const transportData = [
+const transportJapanData = [
   {
     id: 1,
     name: '成田機場到新宿APA Hotel',
@@ -38,6 +38,15 @@ const transportData = [
     id: 6,
     name: '新宿APA Hotel到鎌倉大都會酒店',
     description: 'Organic and plant-based dishes'
+  }
+]
+
+const transportChinaData = [
+  {
+    id: 1,
+    name: '上海浦東機場到全季酒店(南京東路店)',
+    description: '上海浦東機場地鐵 → 南京東路站',
+    link: 'https://www.klook.com/zh-TW/rails-32/1012-japan/route-1336/naritaairportterminalo-to-shinjuku-trains/'
   }
 ]
 
@@ -104,29 +113,63 @@ export function Transportation() {
             </div>
           </div>
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {transportData.map((transport) => (
-              <div key={transport.id} className="border rounded-lg">
-                {transport.link ? (
-                  <Link href={transport.link} target="_blank">
-                    <div className="p-4">
-                      <h3 className="text-lg font-semibold">
-                        {transport.name}
-                      </h3>
-                      <p className="text-muted-foreground">
-                        {transport.description}
-                      </p>
-                    </div>
-                  </Link>
-                ) : (
-                  <div className="p-4">
-                    <h3 className="text-lg font-semibold">{transport.name}</h3>
-                    <p className="text-muted-foreground">
-                      {transport.description}
-                    </p>
+            {countrySelected === 'China' ? (
+              <>
+                {transportChinaData.map((transport) => (
+                  <div key={transport.id} className="border rounded-lg">
+                    {transport.link ? (
+                      <Link href={transport.link} target="_blank">
+                        <div className="p-4">
+                          <h3 className="text-lg font-semibold">
+                            {transport.name}
+                          </h3>
+                          <p className="text-muted-foreground">
+                            {transport.description}
+                          </p>
+                        </div>
+                      </Link>
+                    ) : (
+                      <div className="p-4">
+                        <h3 className="text-lg font-semibold">
+                          {transport.name}
+                        </h3>
+                        <p className="text-muted-foreground">
+                          {transport.description}
+                        </p>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            ))}
+                ))}
+              </>
+            ) : (
+              <>
+                {transportJapanData.map((transport) => (
+                  <div key={transport.id} className="border rounded-lg">
+                    {transport.link ? (
+                      <Link href={transport.link} target="_blank">
+                        <div className="p-4">
+                          <h3 className="text-lg font-semibold">
+                            {transport.name}
+                          </h3>
+                          <p className="text-muted-foreground">
+                            {transport.description}
+                          </p>
+                        </div>
+                      </Link>
+                    ) : (
+                      <div className="p-4">
+                        <h3 className="text-lg font-semibold">
+                          {transport.name}
+                        </h3>
+                        <p className="text-muted-foreground">
+                          {transport.description}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -132,48 +132,11 @@ export function Schedule() {
 function ChinaSchedule({ day }: { day: string }) {
   // Define schedules for each day
   const schedules = {
-    'Day 1': [
-      {
-        time: '09:00 AM',
-        activity: '桃園機場集合'
-      },
-      {
-        time: '11:30 AM - 13:55 PM',
-        activity: 'Flight from 桃園國際機場 to 上海浦東機場'
-      },
-      {
-        time: '12:55 PM - 01:55 PM',
-        activity: 'Arrive at Tokyo, customs clearance'
-      },
-      { time: '01:55 PM onwards', activity: 'Check in at 新宿御宛APA' }
-    ],
+    'Day 1': [{ time: '', activity: 'Free day' }],
     'Day 2': [{ time: '', activity: 'Free day' }],
     'Day 3': [{ time: '', activity: 'Free day' }],
-    'Day 4': [
-      {
-        time: '08:00 AM - 10:30 AM',
-        activity: '鎌倉大都會大酒店 to 鎌倉高校前'
-      },
-      {
-        time: '10:30 AM - 01:30 PM',
-        activity: '鎌倉高校前 visit (SLAM DANK 平交道, 七里濱美景咖啡)'
-      },
-      { time: '01:30 PM - 02:30 PM', activity: 'Visit 長谷寺' },
-      { time: '02:30 PM - 05:00 PM', activity: 'Visit 鎌倉大佛, 鶴岡八幡宮' },
-      {
-        time: '05:00 PM - 06:00 PM',
-        activity: 'Free time, 鎌倉大都會大酒店 dinner'
-      }
-    ],
-    'Day 5': [
-      { time: '08:00 AM - 10:30 AM', activity: '鎌倉大都會大酒店 to 江島神社' },
-      { time: '10:30 AM - 11:00 AM', activity: '江之島海蠟燭展望燈塔 visit' },
-      { time: '11:00 AM - 01:00 PM', activity: 'Visit 江之島岩屋' },
-      { time: '01:00 PM - 02:30 PM', activity: 'Lunch at 江之島' },
-      { time: '02:30 PM - 03:30 PM', activity: 'Visit 新江之島水族館' },
-      { time: '03:30 PM - 04:30 PM', activity: 'Return to 鎌倉大都會大酒店' },
-      { time: '04:30 PM - 06:00 PM', activity: 'Dinner at hotel' }
-    ]
+    'Day 4': [{ time: '', activity: 'Free day' }],
+    'Day 5': [{ time: '', activity: 'Free day' }]
   }
 
   const daySchedule = schedules[day as keyof typeof schedules] || []

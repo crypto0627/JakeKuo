@@ -3,6 +3,8 @@ import { useCallback, useState } from 'react'
 
 const NavLists = [
   { title: 'schedule', link: 'schedule' },
+  { title: 'ticket', link: 'ticket' },
+  { title: 'transportation', link: 'transportation' },
   { title: 'cuisine', link: 'cuisine' }
 ]
 const NavLinks = ({ onClose }: { onClose: () => void }) => {

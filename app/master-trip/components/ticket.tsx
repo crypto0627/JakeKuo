@@ -48,7 +48,7 @@ export function Ticket() {
 
   return (
     <motion.section
-      id="cuisine"
+      id="ticket"
       ref={ticketDataRef}
       initial={{ opacity: 0, y: 20 }}
       animate={isTicketInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
