@@ -5,27 +5,43 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/lib/store'
 import { CountryButton } from './countrybtn'
 import { setCountry } from '@/lib/store/countrySlice'
-import Image from 'next/image'
 import Link from 'next/link'
 
-const cuisineData = [
+const transportData = [
   {
     id: 1,
-    name: 'Shibuya敘敘苑燒肉',
-    description: '敘敘苑預約鏈接',
-    imageSrc: '/master-trip/shushuyuan.webp',
-    link: 'https://www.jojoen.co.jp/cn/'
+    name: '成田機場到新宿APA Hotel',
+    description: '成田機場第一航廈(成田特快) → 新宿',
+    link: 'https://www.klook.com/zh-TW/rails-32/1012-japan/route-1336/naritaairportterminalo-to-shinjuku-trains/'
   },
   {
     id: 2,
-    name: '新宿 餃子の福包',
-    description: '餃子の福包',
-    imageSrc: '/master-trip/chaochifubao.webp',
-    link: 'https://maps.app.goo.gl/bNcsCTcv9JW7kcKs6'
+    name: '新宿APA Hotel到Shibuya Sky',
+    description: '搭乘副都心線 新宿三丁目站-> 澀谷站'
+  },
+  {
+    id: 3,
+    name: '新宿APA Hotel到豐洲市場',
+    description: '搭乘新宿線 新宿三丁目站 -> 市谷站轉乘 有樂町線 -> 豐洲站'
+  },
+  {
+    id: 4,
+    name: '豐洲到台場',
+    description: '搭乘海鷗線 豐洲站 -> 台場站'
+  },
+  {
+    id: 5,
+    name: '台場到新宿APA Hotel',
+    description: 'Organic and plant-based dishes'
+  },
+  {
+    id: 6,
+    name: '新宿APA Hotel到鎌倉大都會酒店',
+    description: 'Organic and plant-based dishes'
   }
 ]
 
-export function Cuisine() {
+export function Transportation() {
   const [countrySelected, setCountrySelected] = useState<string>('China')
 
   const dispatch = useDispatch()
@@ -43,22 +59,25 @@ export function Cuisine() {
     }
   }, [Country])
 
-  const cuisineRef = useRef(null)
-  const isCuisineInView = useInView(cuisineRef, { once: false, amount: 0.1 })
+  const transportRef = useRef(null)
+  const isTransportInView = useInView(transportRef, {
+    once: false,
+    amount: 0.1
+  })
 
   return (
     <motion.section
-      id="cuisine"
-      ref={cuisineRef}
+      id="transport"
+      ref={transportRef}
       initial={{ opacity: 0, y: 20 }}
-      animate={isCuisineInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      animate={isTransportInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
       className="flex h-screen w-full bg-background"
     >
       <div className="flex flex-1 flex-col">
         <header className="border-b bg-background px-6 py-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold">美食地圖</h2>
+            <h2 className="text-xl font-semibold">交通資訊</h2>
           </div>
         </header>
         <div className="flex-1 p-6">
@@ -85,40 +104,26 @@ export function Cuisine() {
             </div>
           </div>
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {cuisineData.map((cuisine) => (
-              <div key={cuisine.id} className="border rounded-lg">
-                {cuisine.link ? (
-                  <Link href={cuisine.link} target="_blank">
-                    <Image
-                      src={cuisine.imageSrc}
-                      width={300}
-                      height={300}
-                      alt={`${cuisine.name} Image`}
-                      className="object-cover w-full h-48 rounded-t-lg"
-                    />
+            {transportData.map((transport) => (
+              <div key={transport.id} className="border rounded-lg">
+                {transport.link ? (
+                  <Link href={transport.link} target="_blank">
                     <div className="p-4">
-                      <h3 className="text-lg font-semibold">{cuisine.name}</h3>
+                      <h3 className="text-lg font-semibold">
+                        {transport.name}
+                      </h3>
                       <p className="text-muted-foreground">
-                        {cuisine.description}
+                        {transport.description}
                       </p>
                     </div>
                   </Link>
                 ) : (
-                  <>
-                    <Image
-                      src={cuisine.imageSrc}
-                      width={300}
-                      height={300}
-                      alt={`${cuisine.name} Image`}
-                      className="object-cover w-full h-48 rounded-t-lg"
-                    />
-                    <div className="p-4">
-                      <h3 className="text-lg font-semibold">{cuisine.name}</h3>
-                      <p className="text-muted-foreground">
-                        {cuisine.description}
-                      </p>
-                    </div>
-                  </>
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold">{transport.name}</h3>
+                    <p className="text-muted-foreground">
+                      {transport.description}
+                    </p>
+                  </div>
                 )}
               </div>
             ))}

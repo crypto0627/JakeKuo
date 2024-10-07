@@ -229,7 +229,7 @@ function JapanSchedule({ day }: { day: string }) {
       },
       { time: '01:55 PM - 03:00 PM', activity: 'Check in at 新宿御宛APA' },
       { time: '03:00 PM - 06:30 PM', activity: '涉谷Sky' },
-      { time: '07:00 PM - 08:30 PM', activity: 'Dinner at 涉谷敘敘院燒肉' },
+      { time: '07:00 PM - 08:30 PM', activity: 'Dinner at 涉谷敘敘苑燒肉' },
       {
         time: '08:30 PM - 10:30 PM',
         activity: 'Walk at 新宿歌舞伎町'
@@ -238,17 +238,18 @@ function JapanSchedule({ day }: { day: string }) {
     'Day 2': [
       { time: '08:30 AM - 09:30 AM', activity: 'Arrive at 豐洲市場' },
       { time: '09:30 AM - 10:30 AM', activity: 'Eat brunch at 豐洲市場' },
-      { time: '10:30 AM - 03:30 PM', activity: 'Shop at 豐洲千客萬來' },
+      { time: '10:30 AM - 12:30 PM', activity: 'Shop at 豐洲千客萬來' },
       {
-        time: '02:30 PM - 04:30 PM',
-        activity: 'Visit 豐洲teamLab Planets(需預約)'
+        time: '12:30 PM - 03:30 PM',
+        activity:
+          '年輕人逛豐洲teamLab Planets(需預約) 老人家逛Mitsui Shopping Park LaLaport都市船塢豐洲'
       },
-      { time: '04:30 PM - 06:30 PM', activity: '萬葉俱樂部泡湯(需預約)' },
       {
-        time: '06:30 PM - 08:30 PM',
+        time: '03:30 PM - 06:30 PM',
         activity: 'Visit 台場海濱公園 鋼彈 自由女神像 台場夜景 彩虹大橋'
       },
-      { time: '08:30 PM - 09:30 PM', activity: 'Return to 新宿APA Hotel' }
+      { time: '06:30 PM - 07:30 PM', activity: 'Dinner at 台場' },
+      { time: '07:30 PM - 08:30 PM', activity: 'Return to 新宿APA Hotel' }
     ],
     'Day 3': [
       { time: '09:30 AM - 10:30 AM', activity: 'Eat brunch at 新宿' },

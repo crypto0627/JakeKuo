@@ -8,24 +8,24 @@ import { setCountry } from '@/lib/store/countrySlice'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const cuisineData = [
+const ticketData = [
   {
     id: 1,
-    name: 'Shibuya敘敘苑燒肉',
-    description: '敘敘苑預約鏈接',
-    imageSrc: '/master-trip/shushuyuan.webp',
-    link: 'https://www.jojoen.co.jp/cn/'
+    name: 'Shibuya sky',
+    description: 'Shibuya sky ticket link',
+    imageSrc: '/master-trip/shibuya.webp',
+    link: 'https://www.klook.com/zh-TW/activity/70672-shibuya-sky-tokyo/'
   },
   {
     id: 2,
-    name: '新宿 餃子の福包',
-    description: '餃子の福包',
-    imageSrc: '/master-trip/chaochifubao.webp',
-    link: 'https://maps.app.goo.gl/bNcsCTcv9JW7kcKs6'
+    name: 'Teamlab Plants & 萬葉俱樂部溫泉',
+    description: 'Teamlab Plants & 萬葉俱樂部溫泉套票',
+    imageSrc: '/master-trip/teamlab_plants.webp',
+    link: 'https://www.klook.com/zh-TW/activity/25300-teamlab-planets-toyosu-tokyo-ticket/'
   }
 ]
 
-export function Cuisine() {
+export function Ticket() {
   const [countrySelected, setCountrySelected] = useState<string>('China')
 
   const dispatch = useDispatch()
@@ -43,22 +43,22 @@ export function Cuisine() {
     }
   }, [Country])
 
-  const cuisineRef = useRef(null)
-  const isCuisineInView = useInView(cuisineRef, { once: false, amount: 0.1 })
+  const ticketDataRef = useRef(null)
+  const isTicketInView = useInView(ticketDataRef, { once: false, amount: 0.1 })
 
   return (
     <motion.section
       id="cuisine"
-      ref={cuisineRef}
+      ref={ticketDataRef}
       initial={{ opacity: 0, y: 20 }}
-      animate={isCuisineInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      animate={isTicketInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
       className="flex h-screen w-full bg-background"
     >
       <div className="flex flex-1 flex-col">
         <header className="border-b bg-background px-6 py-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold">美食地圖</h2>
+            <h2 className="text-xl font-semibold">門票資訊</h2>
           </div>
         </header>
         <div className="flex-1 p-6">
@@ -85,37 +85,37 @@ export function Cuisine() {
             </div>
           </div>
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {cuisineData.map((cuisine) => (
-              <div key={cuisine.id} className="border rounded-lg">
-                {cuisine.link ? (
-                  <Link href={cuisine.link} target="_blank">
+            {ticketData.map((ticket) => (
+              <div key={ticket.id} className="border rounded-lg">
+                {ticket.link ? (
+                  <Link href={ticket.link} target="_blank">
                     <Image
-                      src={cuisine.imageSrc}
+                      src={ticket.imageSrc}
                       width={300}
                       height={300}
-                      alt={`${cuisine.name} Image`}
+                      alt={`${ticket.name} Image`}
                       className="object-cover w-full h-48 rounded-t-lg"
                     />
                     <div className="p-4">
-                      <h3 className="text-lg font-semibold">{cuisine.name}</h3>
+                      <h3 className="text-lg font-semibold">{ticket.name}</h3>
                       <p className="text-muted-foreground">
-                        {cuisine.description}
+                        {ticket.description}
                       </p>
                     </div>
                   </Link>
                 ) : (
                   <>
                     <Image
-                      src={cuisine.imageSrc}
+                      src={ticket.imageSrc}
                       width={300}
                       height={300}
-                      alt={`${cuisine.name} Image`}
+                      alt={`${ticket.name} Image`}
                       className="object-cover w-full h-48 rounded-t-lg"
                     />
                     <div className="p-4">
-                      <h3 className="text-lg font-semibold">{cuisine.name}</h3>
+                      <h3 className="text-lg font-semibold">{ticket.name}</h3>
                       <p className="text-muted-foreground">
-                        {cuisine.description}
+                        {ticket.description}
                       </p>
                     </div>
                   </>
