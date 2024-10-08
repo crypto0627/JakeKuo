@@ -118,10 +118,10 @@ const TransportCard = ({
 }: {
   transport: {
     id: number
+    day: string
     link?: string
     name: string
     description: string
-    day: string
   }
 }) => (
   <div className="border rounded-lg">

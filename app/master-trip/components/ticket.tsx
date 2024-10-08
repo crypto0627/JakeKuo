@@ -53,10 +53,11 @@ export function Ticket() {
   const isTicketInView = useInView(ticketRef, { once: false, amount: 0.1 })
 
   const renderTickets = useMemo(() => {
-    return ticketData[countrySelected].map((ticket) => (
-      <TicketCard key={ticket.id} ticket={ticket} />
-    ))
-  }, [countrySelected])
+    const currentTicketData = ticketData[countrySelected]
+    return currentTicketData
+      .filter((ticket) => ticket.day === selectedDay)
+      .map((ticket) => <TicketCard key={ticket.id} ticket={ticket} />)
+  }, [countrySelected, selectedDay])
 
   return (
     <motion.section
@@ -87,7 +88,7 @@ export function Ticket() {
               ))}
             </div>
             <div className="flex items-center gap-2 flex-wrap">
-              {currentDailySchedule.map((day) => (
+              {currentDailySchedule.map((day: string) => (
                 <Button
                   key={day}
                   variant={selectedDay === day ? 'default' : 'outline'}
@@ -113,6 +114,7 @@ const TicketCard = ({
 }: {
   ticket: {
     id: number
+    day: string
     link?: string
     name: string
     description: string
@@ -133,7 +135,7 @@ const TicketCard = ({
 const TicketCardContent = ({
   ticket
 }: {
-  ticket: { name: string; description: string; imageSrc: string }
+  ticket: { name: string; description: string; imageSrc: string; day: string }
 }) => (
   <>
     <Image

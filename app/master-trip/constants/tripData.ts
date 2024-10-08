@@ -1,32 +1,3 @@
-// Ticket
-export const ticketData = {
-  China: [
-    {
-      id: 1,
-      name: 'free',
-      description: 'free',
-      imageSrc: '/test.webp',
-      link: 'free'
-    }
-  ],
-  Japan: [
-    {
-      id: 1,
-      name: 'Shibuya sky',
-      description: 'Shibuya sky ticket link',
-      imageSrc: '/master-trip/shibuya.webp',
-      link: 'https://www.klook.com/zh-TW/activity/70672-shibuya-sky-tokyo/'
-    },
-    {
-      id: 2,
-      name: 'Teamlab Plants & 萬葉俱樂部溫泉',
-      description: 'Teamlab Plants & 萬葉俱樂部溫泉套票',
-      imageSrc: '/master-trip/teamlab_plants.webp',
-      link: 'https://www.klook.com/zh-TW/activity/25300-teamlab-planets-toyosu-tokyo-ticket/'
-    }
-  ]
-}
-
 // Schedules
 const createSchedule = (activities: [string, string][]) =>
   activities.map(([time, activity]) => ({ time, activity }))
@@ -37,11 +8,70 @@ export const schedules: {
   }
 } = {
   China: {
-    'Day 1': [{ time: '', activity: 'Free day' }],
-    'Day 2': [{ time: '', activity: 'Free day' }],
-    'Day 3': [{ time: '', activity: 'Free day' }],
-    'Day 4': [{ time: '', activity: 'Free day' }],
-    'Day 5': [{ time: '', activity: 'Free day' }]
+    'Day 1': createSchedule([
+      ['09:30 AM', '桃園機場集合'],
+      ['11:30 AM - 01:30 PM', 'Flight from 桃園國際機場 to 上海浦東機場'],
+      ['01:30 PM ', '抵達上海'],
+      ['01:30 PM - 03:30 PM', '出關買地鐵票'],
+      ['03:30 PM - 04:30 PM', '搭乘地鐵到酒店放行李'],
+      ['04:30 PM - 05:00 PM', '酒店休息'],
+      ['05:00 PM - 06:00 PM', '南京東路步行街 吃晚餐'],
+      ['06:00 PM - 07:00 PM', '東方明珠塔'],
+      ['07:00 PM - 08:00 PM', '外灘'],
+      ['08:00 PM - 09:00 PM', '回酒店']
+    ]),
+    'Day 2': createSchedule([
+      ['08:30 AM - 09:30 AM', '行李寄放在酒店 搭乘地鐵到豫園'],
+      ['09:30 AM - 12:30 PM', '逛豫園'],
+      ['12:30 PM - 01:30 PM', '吃午餐'],
+      ['01:30 PM - 01:40 PM', '回酒店領行李'],
+      ['01:40 PM - 02:40 PM', '搭地鐵前往蘇州'],
+      ['02:40 PM - 03:00 PM', 'Check in 蘇州酒店'],
+      ['03:00 PM - 06:00 PM', '逛平江路'],
+      ['06:00 PM - 07:00 PM', '晚餐'],
+      ['07:00 PM - 08:00 PM', '回酒店']
+    ]),
+    'Day 3': createSchedule([
+      ['08:30 AM - 09:30 AM', '前往寒山寺和楓橋風景區'],
+      ['09:30 AM - 12:30 PM', '寒山寺'],
+      ['12:30 PM - 01:30 PM', '吃午餐'],
+      ['01:30 PM - 05:30 PM', '逛拙政園 (需提前預約)'],
+      ['05:30 PM - 07:30 PM', '七里山景區 山塘街 吃晚餐'],
+      ['07:30 PM - 08:00 PM', '回酒店'],
+      ['08:30 PM - 10:30 PM', '自由時間 叫外賣']
+    ]),
+    'Day 4': createSchedule([
+      ['08:30 AM - 09:30 AM', '前往烏鎮'],
+      ['09:30 AM - 10:30 AM', '酒店寄放行李'],
+      ['10:30 AM - 05:30 PM', '遊烏鎮'],
+      ['05:30 PM - 06:30 PM', '吃晚餐'],
+      ['06:30 PM - 08:00 PM', '烏鎮夜景'],
+      ['08:00 PM - 09:00 PM', '回酒店休息']
+    ]),
+    'Day 5': createSchedule([
+      ['08:30 AM - 09:30 AM', '前往杭州'],
+      ['09:30 AM - 10:30 AM', '酒店放行李'],
+      ['10:30 AM - 05:30 PM', '遊西湖'],
+      ['05:30 PM - 06:30 PM', '吃晚餐']
+    ]),
+    'Day 6': createSchedule([
+      ['08:30 AM - 09:30 AM', '吃早餐'],
+      ['09:30 AM - 10:30 AM', '杭州遊湖'],
+      ['10:30 AM - 05:30 PM', '夜市'],
+      ['05:30 PM - 06:30 PM', '回酒店']
+    ]),
+    'Day 7': createSchedule([
+      ['08:30 AM - 09:30 AM', '吃早餐'],
+      ['09:30 AM - 10:30 AM', '前往上海'],
+      ['10:30 AM - 05:30 PM', '上海自由行'],
+      ['05:30 PM - 06:30 PM', '吃晚餐']
+    ]),
+    'Day 8': createSchedule([
+      ['08:30 AM - 09:30 AM', '吃早餐'],
+      ['09:30 AM - 10:30 AM', '前往上海浦東機場'],
+      ['10:30 AM - 05:30 PM', '回台灣'],
+      ['05:30 PM - 06:30 PM', '吃晚餐']
+    ])
   },
   Japan: {
     'Day 1': createSchedule([
@@ -102,7 +132,16 @@ export const schedules: {
 }
 
 export const dailySchedule = {
-  China: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+  China: [
+    'Day 1',
+    'Day 2',
+    'Day 3',
+    'Day 4',
+    'Day 5',
+    'Day 6',
+    'Day 7',
+    'Day 8'
+  ],
   Japan: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6']
 }
 
@@ -181,6 +220,29 @@ export const transportData = {
       name: '上海浦東機場到全季酒店(南京東路店)',
       description: '上海浦東機場地鐵 → 南京東路站',
       link: 'https://www.klook.com/zh-TW/rails-32/1012-japan/route-1336/naritaairportterminalo-to-shinjuku-trains/'
+    }
+  ]
+}
+
+// Ticket
+export const ticketData = {
+  China: [],
+  Japan: [
+    {
+      id: 1,
+      day: 'Day 2',
+      name: 'Teamlab Plants & 萬葉俱樂部溫泉',
+      description: 'Teamlab Plants & 萬葉俱樂部溫泉套票',
+      imageSrc: '/master-trip/teamlab_plants.webp',
+      link: 'https://www.klook.com/zh-TW/activity/25300-teamlab-planets-toyosu-tokyo-ticket/'
+    },
+    {
+      id: 2,
+      day: 'Day 3',
+      name: 'Shibuya sky',
+      description: 'Shibuya sky ticket link',
+      imageSrc: '/master-trip/shibuya.webp',
+      link: 'https://www.klook.com/zh-TW/activity/70672-shibuya-sky-tokyo/'
     }
   ]
 }
