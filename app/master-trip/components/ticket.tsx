@@ -1,6 +1,5 @@
 'use client'
-import { motion, useInView } from 'framer-motion'
-import { useEffect, useRef, useState, useMemo } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/lib/store'
 import { CountryButton } from './countrybtn'
@@ -49,9 +48,6 @@ export function Ticket() {
     }
   }, [Daily, currentDailySchedule])
 
-  const ticketRef = useRef(null)
-  const isTicketInView = useInView(ticketRef, { once: false, amount: 0.1 })
-
   const renderTickets = useMemo(() => {
     const currentTicketData = ticketData[countrySelected]
     return currentTicketData
@@ -60,12 +56,8 @@ export function Ticket() {
   }, [countrySelected, selectedDay])
 
   return (
-    <motion.section
+    <section
       id="ticket"
-      ref={ticketRef}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isTicketInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.3, ease: 'easeOut' }}
       className="flex h-screen w-full bg-background lg:px-20"
     >
       <div className="flex flex-1 flex-col">
@@ -105,7 +97,7 @@ export function Ticket() {
           </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   )
 }
 

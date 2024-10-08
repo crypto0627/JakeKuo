@@ -252,22 +252,17 @@ export const cuisineData = {
   China: [
     {
       id: 1,
-      name: 'Shibuya敘敘苑燒肉',
-      description: '敘敘苑預約鏈接',
-      imageSrc: '/master-trip/shushuyuan.webp',
-      link: 'https://www.jojoen.co.jp/cn/'
-    },
-    {
-      id: 2,
-      name: '新宿 餃子の福包',
-      description: '餃子の福包',
-      imageSrc: '/master-trip/chaochifubao.webp',
-      link: 'https://maps.app.goo.gl/bNcsCTcv9JW7kcKs6'
+      day: 'Day 1',
+      name: '上海 蟹黃面 生煎包 湯包 紅糖滋粑 串串 本幫菜',
+      description: '推薦餐廳',
+      imageSrc: '/master-trip/生煎包.webp',
+      link: 'https://www.vietjetair.com/zh-TW/pages/%E4%B8%8A%E6%B5%B7%E5%90%8D%E8%8F%9C%EF%BC%8C%E5%BF%85%E5%98%97-1711435768998'
     }
   ],
   Japan: [
     {
       id: 1,
+      day: 'Day 3',
       name: 'Shibuya敘敘苑燒肉',
       description: '敘敘苑預約鏈接',
       imageSrc: '/master-trip/shushuyuan.webp',
@@ -275,6 +270,7 @@ export const cuisineData = {
     },
     {
       id: 2,
+      day: 'Day 1',
       name: '新宿 餃子の福包',
       description: '餃子の福包',
       imageSrc: '/master-trip/chaochifubao.webp',

@@ -1,6 +1,5 @@
 'use client'
-import { motion, useInView } from 'framer-motion'
-import { useEffect, useRef, useState, useMemo } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/lib/store'
 import { CountryButton } from './countrybtn'
@@ -48,9 +47,6 @@ export function Schedule() {
     }
   }, [Daily, currentDailySchedule])
 
-  const scheduleRef = useRef(null)
-  const isScheduleInView = useInView(scheduleRef, { once: false, amount: 0.1 })
-
   const renderSchedule = useMemo(() => {
     const scheduleData = schedules[countrySelected]
     const daySchedule =
@@ -80,12 +76,8 @@ export function Schedule() {
   }, [countrySelected, selectedDay])
 
   return (
-    <motion.section
+    <section
       id="schedule"
-      ref={scheduleRef}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isScheduleInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.3, ease: 'easeOut' }}
       className="flex h-screen w-full bg-background lg:px-20"
     >
       <div className="flex flex-1 flex-col">
@@ -120,9 +112,13 @@ export function Schedule() {
               ))}
             </div>
           </div>
-          <div className="mt-6 grid gap-6">{renderSchedule}</div>
+          <div className="mt-6 grid gap-6">
+            <div className="min-h-[300px]">
+              {renderSchedule}
+            </div>
+          </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   )
 }

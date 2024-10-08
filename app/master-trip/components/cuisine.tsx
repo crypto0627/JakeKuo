@@ -1,6 +1,5 @@
 'use client'
-import { motion, useInView } from 'framer-motion'
-import { useEffect, useRef, useState, useMemo } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/lib/store'
 import { CountryButton } from './countrybtn'
@@ -49,22 +48,16 @@ export function Cuisine() {
     }
   }, [Daily, currentDailySchedule])
 
-  const cuisineRef = useRef(null)
-  const isCuisineInView = useInView(cuisineRef, { once: false, amount: 0.1 })
-
   const renderCuisine = useMemo(() => {
-    return cuisineData[countrySelected].map((cuisine) => (
-      <CuisineCard key={cuisine.id} cuisine={cuisine} />
-    ))
-  }, [countrySelected])
+    const currentCuisineData = cuisineData[countrySelected]
+    return currentCuisineData
+      .filter((cuisine) => cuisine.day === selectedDay)
+      .map((cuisine) => <CuisineCard key={cuisine.id} cuisine={cuisine} />)
+  }, [countrySelected, selectedDay])
 
   return (
-    <motion.section
+    <section
       id="cuisine"
-      ref={cuisineRef}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isCuisineInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.3, ease: 'easeOut' }}
       className="flex h-screen w-full bg-background lg:px-20"
     >
       <div className="flex flex-1 flex-col">
@@ -87,7 +80,7 @@ export function Cuisine() {
               ))}
             </div>
             <div className="flex items-center gap-2 flex-wrap">
-              {currentDailySchedule.map((day) => (
+              {currentDailySchedule.map((day: string) => (
                 <Button
                   key={day}
                   variant={selectedDay === day ? 'default' : 'outline'}
@@ -104,7 +97,7 @@ export function Cuisine() {
           </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   )
 }
 
@@ -113,6 +106,7 @@ const CuisineCard = ({
 }: {
   cuisine: {
     id: number
+    day: string
     link?: string
     name: string
     description: string
@@ -133,7 +127,7 @@ const CuisineCard = ({
 const CuisineCardContent = ({
   cuisine
 }: {
-  cuisine: { name: string; description: string; imageSrc: string }
+  cuisine: { name: string; description: string; imageSrc: string; day: string }
 }) => (
   <>
     <Image
