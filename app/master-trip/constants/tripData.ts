@@ -54,9 +54,9 @@ export const schedules: {
       ['08:30 PM - 10:30 PM', 'Walk at 新宿歌舞伎町']
     ]),
     'Day 2': createSchedule([
-      ['08:30 AM - 09:30 AM', 'Arrive at 豐洲市場'],
-      ['09:30 AM - 10:30 AM', 'Eat brunch at 豐洲市場'],
-      ['10:30 AM - 12:30 PM', 'Shop at 豐洲千客萬來'],
+      ['08:30 AM - 09:30 AM', '抵達 豐洲市場'],
+      ['09:30 AM - 10:30 AM', '吃美食 豐洲市場'],
+      ['10:30 AM - 12:30 PM', '逛街 豐洲千客萬來'],
       [
         '12:30 PM - 03:30 PM',
         '想看酷炫的景→豐洲teamLab Planets(需預約) 想逛街→Mitsui Shopping Park LaLaport都市船塢豐洲或泡湯'
@@ -65,35 +65,37 @@ export const schedules: {
         '03:30 PM - 06:30 PM',
         'Visit 台場海濱公園 鋼彈 自由女神像 台場夜景 彩虹大橋'
       ],
-      ['06:30 PM - 07:30 PM', 'Dinner at 台場'],
-      ['07:30 PM - 08:30 PM', 'Return to 新宿御宛APA Hotel']
+      ['06:30 PM - 07:30 PM', '晚餐 台場'],
+      ['07:30 PM - 08:30 PM', '回酒店']
     ]),
     'Day 3': createSchedule([
-      ['09:30 AM - 10:30 AM', 'Eat breakfast at 新宿'],
-      ['10:30 AM - 12:00 PM', '涉谷Sky'],
+      ['09:30 AM - 10:30 AM', '早餐 新宿'],
+      ['10:30 AM - 12:00 PM', '澀谷八公銅像'],
       ['12:00 PM - 02:00 PM', '涉谷敘敘苑燒肉'],
-      ['02:00 PM - 05:00 PM', '涉谷逛街 不想逛街可以去明治神宮和表參道'],
-      ['05:00 PM - 06:30 PM', 'Dinner at 新宿']
+      ['02:00 PM - 05:00 PM', '涉谷 原宿逛街 不想逛街可以去明治神宮和表參道'],
+      ['05:00 PM - 06:30 PM', '晚餐 涉谷'],
+      ['06:30 PM - 08:30 PM', '涉谷Sky'],
+      ['08:30 PM - 09:00 PM', '回酒店']
     ]),
     'Day 4': createSchedule([
       ['09:30 AM - 10:30 AM', '新宿APA Hotel to 鎌倉站 鎌倉大酒店放行李'],
       ['10:30 AM - 01:30 PM', '鎌倉高校前 (SLAM DANK 平交道, 七里濱美景咖啡)'],
       ['01:30 PM - 02:30 PM', '長谷寺'],
-      ['02:30 PM - 05:00 PM', '鎌倉大佛, 鶴岡八幡宮'],
-      ['05:00 PM - 06:00 PM', 'Free time, 鎌倉大都會大酒店 dinner']
+      ['02:30 PM - 05:00 PM', '鎌倉大佛, 鶴岡八幡宮 Check in 鎌倉大都會大酒店'],
+      ['05:00 PM - 06:00 PM', '晚餐 鎌倉大都會大酒店']
     ]),
     'Day 5': createSchedule([
       ['08:00 AM - 10:30 AM', '鎌倉大都會大酒店 to 江島神社'],
-      ['10:30 AM - 11:00 AM', '江之島海蠟燭展望燈塔 visit'],
-      ['11:00 AM - 01:00 PM', 'Visit 江之島岩屋'],
-      ['01:00 PM - 02:30 PM', 'Lunch at 江之島'],
-      ['02:30 PM - 03:30 PM', 'Visit 新江之島水族館'],
-      ['03:30 PM - 04:30 PM', 'Return to 鎌倉大都會大酒店'],
-      ['04:30 PM - 06:00 PM', 'Dinner at hotel']
+      ['10:30 AM - 11:00 AM', '江之島海蠟燭展望燈塔'],
+      ['11:00 AM - 01:00 PM', '江之島岩屋'],
+      ['01:00 PM - 02:30 PM', '午餐 江之島'],
+      ['02:30 PM - 03:30 PM', '新江之島水族館'],
+      ['03:30 PM - 04:30 PM', '回酒店'],
+      ['04:30 PM - 06:00 PM', '晚餐 鎌倉大都會大酒店']
     ]),
     'Day 6': createSchedule([
       ['08:30 AM - 09:30 AM', 'Check out 鎌倉大都會大酒店'],
-      ['09:30 AM - 12:00 AM', '鎌倉站 → 成田機場'],
+      ['09:30 AM - 12:00 AM', '鎌倉站 → 羽田機場'],
       ['15:00 PM', '飛機起飛返台']
     ])
   }
@@ -165,7 +167,12 @@ export const transportData = {
     { id: 10, day: 'Day 3', name: '鎌倉周遊', description: '鎌倉周遊券' },
     { id: 11, day: 'Day 4', name: '鎌倉周遊', description: '鎌倉周遊券' },
     { id: 12, day: 'Day 5', name: '鎌倉周遊', description: '鎌倉周遊券' },
-    { id: 13, day: 'Day 6', name: '鎌倉到成田機場', description: '包車前往' }
+    {
+      id: 13,
+      day: 'Day 6',
+      name: '鎌倉到羽田機場',
+      description: '搭乘橫須賀線 鎌倉站 → 橫濱站轉乘京急本線 羽田機場第三航廈'
+    }
   ],
   China: [
     {

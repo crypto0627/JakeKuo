@@ -1,4 +1,5 @@
 export { Navbar } from './navbar'
+export { Banner } from './banner'
 export { FlightInfo } from './flightInfo'
 export { Schedule } from './shcedule'
 export { Ticket } from './ticket'

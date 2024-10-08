@@ -18,7 +18,10 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: 'Jake Kuo - personal website',
   description:
-    'jakekuo-personal website, frontend engineer, resume, portfolio, blockchain'
+    'jakekuo-personal website, frontend engineer, resume, portfolio, blockchain',
+  icons: {
+    icon: '/favicon.ico'
+  }
 }
 
 export default function RootLayout({
