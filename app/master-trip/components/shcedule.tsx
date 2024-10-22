@@ -113,9 +113,7 @@ export function Schedule() {
             </div>
           </div>
           <div className="mt-6 grid gap-6">
-            <div className="min-h-[300px]">
-              {renderSchedule}
-            </div>
+            <div className="min-h-[300px]">{renderSchedule}</div>
           </div>
         </div>
       </div>

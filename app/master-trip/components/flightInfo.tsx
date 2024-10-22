@@ -61,19 +61,19 @@ function ChinaFlightInfo() {
       <FlightDetails
         destination="Shanghai"
         flightNumber="9C8952"
-        airline="春秋航空"
-        departureTime="CST 11:30 - 13:30"
-        departureDate="October 28, 2024"
+        airline="中華航空"
+        departureTime="CST 08:45 - 10:50"
+        departureDate="October 31, 2024"
         origin="Taipei (TPE)"
-        duration="2h 00m"
+        duration="2h 05m"
         arrival="Shanghai (PVG)"
       />
       <div className="my-4 border-t border-gray-200"></div>
       <FlightDetails
         destination="Taipei"
         flightNumber="MU5005"
-        airline="中國東方航空"
-        departureTime="CST 15:45 - 17:40"
+        airline="中華航空"
+        departureTime="CST 19:50 - 21:55"
         departureDate="November 3, 2024"
         origin="Shanghai (PVG)"
         duration="1h 55m"

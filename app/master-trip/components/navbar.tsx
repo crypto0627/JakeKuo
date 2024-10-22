@@ -2,10 +2,10 @@
 import { useCallback, useState } from 'react'
 
 const NAV_ITEMS = [
-  { title: 'Schedule', link: 'schedule' },
-  { title: 'Ticket', link: 'ticket' },
-  { title: 'Transportation', link: 'transportation' },
-  { title: 'Cuisine', link: 'cuisine' }
+  { title: '行程', link: 'schedule' },
+  { title: '門票資訊', link: 'ticket' },
+  { title: '交通', link: 'transportation' },
+  { title: '美食', link: 'cuisine' }
 ]
 
 const NavLinks = ({ onClose }: { onClose: () => void }) => {
