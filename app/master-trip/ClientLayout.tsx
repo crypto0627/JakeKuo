@@ -30,7 +30,11 @@ export default function ClientLayout() {
         </div>
         <FlightInfo />
         {SECTIONS.map(({ id, Component }) => (
-          <section key={id} id={id} className="my-24 lg:my-0">
+          <section
+            key={id}
+            id={id}
+            className={`my-8 lg:my-24 ${id === 'schedule' ? 'lg:mb-24' : ''}`}
+          >
             <Component />
           </section>
         ))}

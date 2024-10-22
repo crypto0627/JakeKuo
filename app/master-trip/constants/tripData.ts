@@ -48,8 +48,8 @@ export const schedules: {
       ['08:30 - 09:30', '虎丘'],
       ['09:30 - 12:30', '寒山寺和楓橋風景區'],
       ['12:30 - 13:30', '吃午餐'],
-      ['13:30 - 17:30', '西園寺'],
-      ['17:30 - 19:30', '觀前街 七里山塘 吃晚餐'],
+      ['13:30 - 17:30', '西園寺逛逛 打車到七里山塘風景區逛逛'],
+      ['17:30 - 19:30', '打車到觀前街 吃晚餐'],
       ['19:30 - 20:00', '回酒店']
     ]),
     'Day 5': createSchedule([
@@ -71,7 +71,7 @@ export const schedules: {
         '遊西湖十景路線: 柳浪聞鶯 坐船 三潭映月 坐船 花港觀魚 步行 雷鋒夕照 步行 南屏晚鐘 步行 蘇堤春曉 步行 曲院風荷 步行 平湖秋月 步行 斷橋殘雪 完成'
       ],
       ['17:30 - 18:30', '吃晚餐 杭州酒家'],
-      ['18:30 - 20:30', '逛in77百貨 西湖噴水秀']
+      ['18:30 - 20:30', '逛in77百貨 西湖噴水秀 19:30']
     ]),
     'Day 7': createSchedule([
       ['08:30 - 09:30', '吃早餐'],
@@ -80,14 +80,14 @@ export const schedules: {
         '10:30 - 17:30',
         '京杭大運河 到 拱宸橋 步行 小河直街 大兜路歷史街區 香積寺 打車至武林夜市 吃晚餐'
       ],
-      ['17:30 - 18:30', '回酒店'],
-      ['18:30', '搭地鐵到錢塘江 看燈光秀 20:30']
+      ['17:30 - 18:30', '武林夜市逛街'],
+      ['18:30', '打車到錢塘江城市阳台 看燈光秀 19:30']
     ]),
     'Day 8': createSchedule([
-      ['08:30 - 09:30', '打車前往靈隱寺'],
-      ['09:30 - 10:30', '逛靈隱寺'],
-      ['10:30 - 15:30', '打車回酒店Check out 搭高鐵前往上海'],
-      ['15:30 - 16:30', '前往浦東機場'],
+      ['08:30 - 09:30', '早上到上海'],
+      ['09:30 - 11:00', '搭高鐵中'],
+      ['11:00 - 14:30', '上海虹橋機場站附近百貨逛逛'],
+      ['14:30 - 16:30', '前往浦東機場'],
       ['16:30 - 19:45', 'Check in 登機 逛機場']
     ])
   },
@@ -353,26 +353,126 @@ export const transportData = {
       id: 20,
       day: 'Day 5',
       name: '蘇州到烏鎮',
-      description: '蘇州站坐大巴'
+      description: '蘇州站坐大巴或打車'
     },
     {
       id: 21,
       day: 'Day 6',
       name: '烏鎮到杭州',
-      description: '坐大巴'
+      description: '坐大巴或打車'
     },
     {
       id: 22,
-      day: 'Day 6',
-      name: '酒店',
-      description: ''
+      day: 'Day 7',
+      name: '酒店到武林碼頭',
+      description: '打車'
+    },
+    {
+      id: 23,
+      day: 'Day 7',
+      name: '城市陽台到桔子酒店',
+      description: '打車'
+    },
+    {
+      id: 24,
+      day: 'Day 8',
+      name: '杭州桔子酒店到上海虹橋站',
+      description:
+        '定安路站 → 城站 地铁1号线 $2 步行至杭州站轉搭高鐵到上海虹橋站'
+    },
+    {
+      id: 24,
+      day: 'Day 8',
+      name: '上海虹橋站到浦東機場站',
+      description: '搭地铁2号线 $8 1小時44分鐘'
     }
   ]
 }
 
 // Ticket
 export const ticketData = {
-  China: [],
+  China: [
+    {
+      id: 1,
+      day: 'Day 1',
+      name: '上海之巔',
+      description: '118層上海之巔觀光廳門票(提前一天預約)',
+      imageSrc: '/image.png',
+      link: 'https://www.klook.com/zh-TW/activity/4333-shanghai-tower-observation-deck-shanghai/'
+    },
+    {
+      id: 2,
+      day: 'Day 2',
+      name: '宋慶齡故居',
+      description: '宋慶齡故居門票(提前一天預約)',
+      imageSrc: '/image.png',
+      link: 'https://www.shsoong-chingling.com/list-canguanyuyue.html'
+    },
+    {
+      id: 3,
+      day: 'Day 2',
+      name: '孫中山故居',
+      description: '孫中山故居門票(提前一天預約)',
+      imageSrc: '/image.png',
+      link: 'https://sswgw.org.cn/jggk/sscl/shszsgjjng/3939.htm'
+    },
+    {
+      id: 4,
+      day: 'Day 3',
+      name: '蘇州博物館',
+      description: '蘇州博物館門票(提前七天預約)免費 10/26號預約11/2號入館',
+      imageSrc: '/image.png',
+      link: 'https://www.szmuseum.com/Other/ReservationTip'
+    },
+    {
+      id: 5,
+      day: 'Day 3',
+      name: '拙政園',
+      description: '拙政園門票(提前一天預約) $80',
+      imageSrc: '/image.png',
+      link: 'https://tw.trip.com/travel-guide/attraction/suzhou/humble-administrator-s-garden-82473/'
+    },
+    {
+      id: 6,
+      day: 'Day 4',
+      name: '虎丘',
+      description: '虎丘門票(提前一天預約) $60',
+      imageSrc: '/image.png',
+      link: 'https://suzhou.bendibao.com/tour/2020820/ly80094.shtm'
+    },
+    {
+      id: 7,
+      day: 'Day 4',
+      name: '寒山寺',
+      description: '寒山寺門票(提前一天預約) $20',
+      imageSrc: '/image.png',
+      link: 'https://m.suzhou.bendibao.com/tour/69042.shtm'
+    },
+    {
+      id: 8,
+      day: 'Day 4',
+      name: '西園寺',
+      description: '西園寺門票(現場買) $5',
+      imageSrc: '/image.png',
+      link: 'https://m.suzhou.bendibao.com/tour/69042.shtm'
+    },
+    {
+      id: 9,
+      day: 'Day 5',
+      name: '烏鎮西柵',
+      description: '烏鎮西柵 $150',
+      imageSrc: '/image.png',
+      link: 'https://tw.trip.com/travel-guide/attraction/tongxiang/wuzhen-water-town-79254/'
+    },
+    {
+      id: 10,
+      day: 'Day 7',
+      name: '杭州武林門碼頭坐船',
+      description: '船票 $150',
+      imageSrc: '/image.png',
+      link: ''
+    }
+  ],
   Japan: [
     {
       id: 1,
