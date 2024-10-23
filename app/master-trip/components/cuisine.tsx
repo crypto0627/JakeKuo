@@ -136,6 +136,7 @@ const CuisineCardContent = ({
       height={300}
       alt={`${cuisine.name} Image`}
       className="object-cover w-full h-48 rounded-t-lg"
+      priority
     />
     <div className="p-4">
       <h3 className="text-lg font-semibold">{cuisine.name}</h3>

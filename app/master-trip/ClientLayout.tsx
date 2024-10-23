@@ -33,7 +33,12 @@ export default function ClientLayout() {
           <section
             key={id}
             id={id}
-            className={`my-8 lg:my-24 ${id === 'schedule' ? 'lg:mb-24' : ''}`}
+            className="w-full"
+            style={{
+              minHeight: '120vh',
+              maxHeight: '120vh',
+              overflowY: 'auto'
+            }}
           >
             <Component />
           </section>

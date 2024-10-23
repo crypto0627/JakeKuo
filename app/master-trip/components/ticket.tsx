@@ -136,6 +136,7 @@ const TicketCardContent = ({
       height={300}
       alt={`${ticket.name} Image`}
       className="object-cover w-full h-48 rounded-t-lg"
+      priority
     />
     <div className="p-4">
       <h3 className="text-lg font-semibold">{ticket.name}</h3>
