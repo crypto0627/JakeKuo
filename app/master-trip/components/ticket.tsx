@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/lib/store'
 import { CountryButton } from './countrybtn'
 import { setCountry } from '@/lib/store/countrySlice'
-import Image from 'next/image'
 import Link from 'next/link'
 import { ticketData, dailySchedule } from '../constants/tripData'
 import { setDaily } from '@/lib/store/dailySlice'
@@ -110,7 +109,6 @@ const TicketCard = ({
     link?: string
     name: string
     description: string
-    imageSrc: string
   }
 }) => (
   <div className="border rounded-lg">
@@ -127,20 +125,10 @@ const TicketCard = ({
 const TicketCardContent = ({
   ticket
 }: {
-  ticket: { name: string; description: string; imageSrc: string; day: string }
+  ticket: { name: string; description: string; day: string }
 }) => (
-  <>
-    <Image
-      src={ticket.imageSrc}
-      width={300}
-      height={300}
-      alt={`${ticket.name} Image`}
-      className="object-cover w-full h-48 rounded-t-lg"
-      priority
-    />
-    <div className="p-4">
-      <h3 className="text-lg font-semibold">{ticket.name}</h3>
-      <p className="text-muted-foreground">{ticket.description}</p>
-    </div>
-  </>
+  <div className="p-4">
+    <h3 className="text-lg font-semibold">{ticket.name}</h3>
+    <p className="text-muted-foreground">{ticket.description}</p>
+  </div>
 )

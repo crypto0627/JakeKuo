@@ -397,7 +397,6 @@ export const ticketData = {
       day: 'Day 1',
       name: '上海之巔',
       description: '118層上海之巔觀光廳門票(提前一天預約)',
-      imageSrc: '/image.png',
       link: 'https://www.klook.com/zh-TW/activity/4333-shanghai-tower-observation-deck-shanghai/'
     },
     {
@@ -405,7 +404,6 @@ export const ticketData = {
       day: 'Day 2',
       name: '宋慶齡故居',
       description: '宋慶齡故居門票(提前一天預約)',
-      imageSrc: '/image.png',
       link: 'https://www.shsoong-chingling.com/list-canguanyuyue.html'
     },
     {
@@ -413,7 +411,6 @@ export const ticketData = {
       day: 'Day 2',
       name: '孫中山故居',
       description: '孫中山故居門票(提前一天預約)',
-      imageSrc: '/image.png',
       link: 'https://sswgw.org.cn/jggk/sscl/shszsgjjng/3939.htm'
     },
     {
@@ -421,7 +418,6 @@ export const ticketData = {
       day: 'Day 3',
       name: '蘇州博物館',
       description: '蘇州博物館門票(提前七天預約)免費 10/26號預約11/2號入館',
-      imageSrc: '/image.png',
       link: 'https://www.szmuseum.com/Other/ReservationTip'
     },
     {
@@ -429,7 +425,6 @@ export const ticketData = {
       day: 'Day 3',
       name: '拙政園',
       description: '拙政園門票(提前一天預約) $80',
-      imageSrc: '/image.png',
       link: 'https://tw.trip.com/travel-guide/attraction/suzhou/humble-administrator-s-garden-82473/'
     },
     {
@@ -437,7 +432,6 @@ export const ticketData = {
       day: 'Day 4',
       name: '虎丘',
       description: '虎丘門票(提前一天預約) $60',
-      imageSrc: '/image.png',
       link: 'https://suzhou.bendibao.com/tour/2020820/ly80094.shtm'
     },
     {
@@ -445,7 +439,6 @@ export const ticketData = {
       day: 'Day 4',
       name: '寒山寺',
       description: '寒山寺門票(提前一天預約) $20',
-      imageSrc: '/image.png',
       link: 'https://m.suzhou.bendibao.com/tour/69042.shtm'
     },
     {
@@ -453,7 +446,6 @@ export const ticketData = {
       day: 'Day 4',
       name: '西園寺',
       description: '西園寺門票(現場買) $5',
-      imageSrc: '/image.png',
       link: 'https://m.suzhou.bendibao.com/tour/69042.shtm'
     },
     {
@@ -461,7 +453,6 @@ export const ticketData = {
       day: 'Day 5',
       name: '烏鎮西柵',
       description: '烏鎮西柵 $150',
-      imageSrc: '/image.png',
       link: 'https://tw.trip.com/travel-guide/attraction/tongxiang/wuzhen-water-town-79254/'
     },
     {
@@ -469,7 +460,6 @@ export const ticketData = {
       day: 'Day 7',
       name: '杭州武林門碼頭坐船',
       description: '船票 $150',
-      imageSrc: '/image.png',
       link: ''
     }
   ],
@@ -479,7 +469,6 @@ export const ticketData = {
       day: 'Day 2',
       name: 'Teamlab Plants & 萬葉俱樂部溫泉',
       description: 'Teamlab Plants & 萬葉俱樂部溫泉套票',
-      imageSrc: '/master-trip/teamlab_plants.webp',
       link: 'https://www.klook.com/zh-TW/activity/25300-teamlab-planets-toyosu-tokyo-ticket/'
     },
     {
@@ -487,7 +476,6 @@ export const ticketData = {
       day: 'Day 3',
       name: 'Shibuya sky',
       description: 'Shibuya sky ticket link',
-      imageSrc: '/master-trip/shibuya.webp',
       link: 'https://www.klook.com/zh-TW/activity/70672-shibuya-sky-tokyo/'
     }
   ]
@@ -499,8 +487,8 @@ export const cuisineData = {
     {
       id: 1,
       day: 'Day 1',
-      name: '上海 蟹黃面 生煎包 湯包 紅糖滋粑 串串 本幫菜',
-      description: '推薦餐廳',
+      name: '南京大排檔 小楊生煎 ',
+      description: '南京東路推薦餐廳',
       imageSrc: '/master-trip/生煎包.webp',
       link: 'https://www.vietjetair.com/zh-TW/pages/%E4%B8%8A%E6%B5%B7%E5%90%8D%E8%8F%9C%EF%BC%8C%E5%BF%85%E5%98%97-1711435768998'
     }
