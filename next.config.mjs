@@ -2,8 +2,9 @@
 const nextConfig = {
   output: 'export',
   images: {
-    domains: ['www.jakekuo.com'],
-},
+    unoptimized: true,
+    formats: ["image/avif", "image/webp"],
+  },
 }
 
 export default nextConfig

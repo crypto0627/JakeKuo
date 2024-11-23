@@ -99,6 +99,10 @@ const SkillCard = ({
   </div>
 )
 
+const loaderProp = ({ src }: { src: string }) => {
+  return src;
+}
+
 export default function Resume() {
   return (
     <div className="min-h-screen bg-green-50 text-green-900 font-sans relative">
@@ -107,12 +111,13 @@ export default function Resume() {
         <Section id="profile" title="Profile" Icon={Leaf}>
           <div className="flex flex-col md:flex-row items-center">
             <Image
-              src="https://www.jakekuo.com/profile.webp"
+              src="/profile.webp"
               alt="Jake Kuo"
               width={150}
               height={150}
               className="rounded-xl mb-4 md:mb-0 md:mr-6 w-auto h-auto"
               priority
+              loader={loaderProp}
             />
             <div>
               <h1 className="text-3xl font-bold mb-2">Jake Kuo</h1>
