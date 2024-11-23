@@ -1,0 +1,6 @@
+export * from './Navbar'
+export * from './Banner'
+export * from './Gallery'
+export * from './News'
+export * from './TeamMember'
+export * from './Footer'
