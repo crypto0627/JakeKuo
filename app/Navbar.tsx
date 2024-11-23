@@ -38,7 +38,7 @@ export default function Navbar() {
 
 const NavLinks = ({ onClose }: { onClose: () => void }) => (
   <>
-    {['master-trip', 'words', 'task-manager', 'frontend-interview'].map(
+    {['master-trip'].map(
       (section) => (
         <a
           key={section}
