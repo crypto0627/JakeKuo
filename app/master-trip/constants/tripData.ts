@@ -489,7 +489,7 @@ export const cuisineData = {
       day: 'Day 1',
       name: '南京大排檔 小楊生煎 ',
       description: '南京東路推薦餐廳',
-      imageSrc: '/master-trip/生煎包.webp',
+      imageSrc: 'https://www.jakekuo.com//master-trip/生煎包.webp',
       link: 'https://www.vietjetair.com/zh-TW/pages/%E4%B8%8A%E6%B5%B7%E5%90%8D%E8%8F%9C%EF%BC%8C%E5%BF%85%E5%98%97-1711435768998'
     }
   ],
@@ -499,7 +499,7 @@ export const cuisineData = {
       day: 'Day 3',
       name: 'Shibuya敘敘苑燒肉',
       description: '敘敘苑預約鏈接',
-      imageSrc: '/master-trip/shushuyuan.webp',
+      imageSrc: 'https://www.jakekuo.com//master-trip/shushuyuan.webp',
       link: 'https://www.jojoen.co.jp/cn/'
     },
     {
@@ -507,7 +507,7 @@ export const cuisineData = {
       day: 'Day 1',
       name: '新宿 餃子の福包',
       description: '餃子の福包',
-      imageSrc: '/master-trip/chaochifubao.webp',
+      imageSrc: 'https://www.jakekuo.com//master-trip/chaochifubao.webp',
       link: 'https://maps.app.goo.gl/bNcsCTcv9JW7kcKs6'
     },
     {
@@ -515,7 +515,7 @@ export const cuisineData = {
       day: 'Day 1',
       name: '新宿 HARBS',
       description: 'HARBS',
-      imageSrc: '/image.png',
+      imageSrc: 'https://www.jakekuo.com//image.png',
       link: 'https://maps.app.goo.gl/bNcsCTcv9JW7kcKs6'
     }
   ]

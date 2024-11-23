@@ -107,7 +107,7 @@ export default function Resume() {
         <Section id="profile" title="Profile" Icon={Leaf}>
           <div className="flex flex-col md:flex-row items-center">
             <Image
-              src="/profile.webp"
+              src="https://www.jakekuo.com/profile.webp"
               alt="Jake Kuo"
               width={150}
               height={150}
