@@ -99,10 +99,6 @@ const SkillCard = ({
   </div>
 )
 
-const loaderProp = ({ src }: { src: string }) => {
-  return src;
-}
-
 export default function Resume() {
   return (
     <div className="min-h-screen bg-green-50 text-green-900 font-sans relative">
@@ -117,7 +113,6 @@ export default function Resume() {
               height={150}
               className="rounded-xl mb-4 md:mb-0 md:mr-6 w-auto h-auto"
               priority
-              loader={loaderProp}
             />
             <div>
               <h1 className="text-3xl font-bold mb-2">Jake Kuo</h1>
