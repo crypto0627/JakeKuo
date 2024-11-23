@@ -109,9 +109,10 @@ export default function Resume() {
             <Image
               src="/profile.webp"
               alt="Jake Kuo"
-              width={150}
-              height={150}
+              width={25}
+              height={25}
               className="rounded-xl mb-4 md:mb-0 md:mr-6 w-auto h-auto"
+              style={{ width: '230px', height: '350px' }}
               priority
             />
             <div>
