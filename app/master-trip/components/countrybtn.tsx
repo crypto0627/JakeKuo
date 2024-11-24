@@ -1,4 +1,4 @@
-import { CountryButtonProps } from '@/interfaces/SchceduleInterfaces'
+import { CountryButtonProps } from '../interfaces/SchceduleInterfaces'
 import { cn } from '@/lib/utils'
 
 export function CountryButton({

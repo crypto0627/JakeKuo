@@ -38,7 +38,7 @@ export default function Navbar() {
 
 const NavLinks = ({ onClose }: { onClose: () => void }) => (
   <>
-    {['master-trip'].map((section) => (
+    {['master-trip', 'web3-example'].map((section) => (
       <a
         key={section}
         href={`/${section}`}

@@ -4,8 +4,8 @@ import { CountryButton } from './countrybtn'
 import { FlightDetails } from './flightdetails'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '@/lib/store'
-import { setCountry } from '@/lib/store/countrySlice'
+import { RootState } from '../lib/store'
+import { setCountry } from '../lib/store/countrySlice'
 
 export function FlightInfo() {
   const dispatch = useDispatch()

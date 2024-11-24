@@ -1,5 +1,6 @@
 export * from './Navbar'
 export * from './Banner'
+export * from './Features'
 export * from './Gallery'
 export * from './News'
 export * from './TeamMember'

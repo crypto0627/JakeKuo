@@ -11,7 +11,7 @@ import {
   Banner
 } from './components'
 import { Provider } from 'react-redux'
-import { store } from '@/lib/store'
+import { store } from './lib/store'
 
 const SECTIONS = [
   { id: 'schedule', Component: Schedule },

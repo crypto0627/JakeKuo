@@ -1,4 +1,4 @@
-import { FlightDetailsProps } from '@/interfaces/FlightDetailsInterfaces'
+import { FlightDetailsProps } from '../interfaces/FlightDetailsInterfaces'
 import { Plane } from 'lucide-react'
 
 export function FlightDetails({

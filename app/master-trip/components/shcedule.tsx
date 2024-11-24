@@ -1,12 +1,12 @@
 'use client'
 import { useEffect, useState, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '@/lib/store'
+import { RootState } from '../lib/store'
 import { CountryButton } from './countrybtn'
-import { setCountry } from '@/lib/store/countrySlice'
+import { setCountry } from '../lib/store/countrySlice'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { schedules, dailySchedule } from '../constants/tripData'
-import { setDaily } from '@/lib/store/dailySlice'
+import { setDaily } from '../lib/store/dailySlice'
 import { Button } from '@/components/ui/button'
 
 export function Schedule() {
