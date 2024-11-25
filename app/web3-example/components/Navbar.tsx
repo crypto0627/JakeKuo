@@ -31,7 +31,10 @@ export function Navbar() {
               </Link>
             </div>
           ))}
-          <Button className="text-purple-300 font-bold hover:scale-125 transition-transform duration-500" onClick={toggleLogin}>
+          <Button
+            className="text-purple-300 font-bold hover:scale-125 transition-transform duration-500"
+            onClick={toggleLogin}
+          >
             Login/SignUp
           </Button>
         </div>
@@ -45,7 +48,11 @@ export function Navbar() {
               aria-label="Close Menu"
             />
           ) : (
-            <Menu className="h-6 w-6" onClick={toggleMenu} aria-label="Open Menu" />
+            <Menu
+              className="h-6 w-6"
+              onClick={toggleMenu}
+              aria-label="Open Menu"
+            />
           )}
           {isMenuOpen && (
             <nav className="absolute top-14 left-0 right-0 flex flex-col items-start px-10 space-y-6 w-full py-8 bg-black opacity-75">
@@ -103,7 +110,7 @@ function LoginWindows({ toggleLogin }: { toggleLogin: () => void }) {
   )
 }
 
-function Login({toggleSignUp}: {toggleSignUp: () => void}) {
+function Login({ toggleSignUp }: { toggleSignUp: () => void }) {
   return (
     <form className="flex flex-col space-y-4">
       <header className="flex justify-center mb-4">
@@ -123,7 +130,10 @@ function Login({toggleSignUp}: {toggleSignUp: () => void}) {
         aria-label="Password"
       />
 
-      <button type="submit" className="bg-purple-600 text-white py-2 rounded hover:bg-purple-700 transition duration-300">
+      <button
+        type="submit"
+        className="bg-purple-600 text-white py-2 rounded hover:bg-purple-700 transition duration-300"
+      >
         Login
       </button>
 
@@ -141,7 +151,7 @@ function Login({toggleSignUp}: {toggleSignUp: () => void}) {
   )
 }
 
-function SignUp({toggleSignUp}: {toggleSignUp: () => void}) {
+function SignUp({ toggleSignUp }: { toggleSignUp: () => void }) {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
@@ -159,7 +169,7 @@ function SignUp({toggleSignUp}: {toggleSignUp: () => void}) {
 
       <div className="relative">
         <input
-          type={showPassword ? "text" : "password"}
+          type={showPassword ? 'text' : 'password'}
           placeholder="Password"
           className="w-full p-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
           aria-label="Password"
@@ -168,7 +178,7 @@ function SignUp({toggleSignUp}: {toggleSignUp: () => void}) {
           type="button"
           className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-300"
           onClick={() => setShowPassword(!showPassword)}
-          aria-label={showPassword ? "Hide Password" : "Show Password"}
+          aria-label={showPassword ? 'Hide Password' : 'Show Password'}
         >
           {showPassword ? (
             <Eye className="h-5 w-5" />
@@ -180,8 +190,8 @@ function SignUp({toggleSignUp}: {toggleSignUp: () => void}) {
 
       <div className="relative">
         <input
-          type={showConfirmPassword ? "text" : "password"}
-          placeholder="Password Confirm" 
+          type={showConfirmPassword ? 'text' : 'password'}
+          placeholder="Password Confirm"
           className="w-full p-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
           aria-label="Confirm Password"
         />
@@ -189,7 +199,11 @@ function SignUp({toggleSignUp}: {toggleSignUp: () => void}) {
           type="button"
           className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-300"
           onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-          aria-label={showConfirmPassword ? "Hide Confirm Password" : "Show Confirm Password"}
+          aria-label={
+            showConfirmPassword
+              ? 'Hide Confirm Password'
+              : 'Show Confirm Password'
+          }
         >
           {showConfirmPassword ? (
             <Eye className="h-5 w-5" />
@@ -199,7 +213,10 @@ function SignUp({toggleSignUp}: {toggleSignUp: () => void}) {
         </button>
       </div>
 
-      <button type="submit" className="bg-purple-600 text-white py-2 rounded hover:bg-purple-700 transition duration-300">
+      <button
+        type="submit"
+        className="bg-purple-600 text-white py-2 rounded hover:bg-purple-700 transition duration-300"
+      >
         Sign Up
       </button>
 
