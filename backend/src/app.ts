@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import authRoutes from './routes/authRoutes'
+import aiRoutes from './routes/aiRoutes'
 import { config } from './config/env'
 
 const app = express()
@@ -11,19 +12,15 @@ app.use(express.json())
 
 // cors
 app.use(
-  cors((req, callback) => {
-    const allowedOrigins = ['http://localhost:3000', 'http://jakekuo.com']
-    const origin = req.header('Origin')
-    if (origin && allowedOrigins.includes(origin)) {
-      callback(null, { origin: true })
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
+  cors({
+    origin: [/^http:\/\/localhost:3\d{3}$/, 'https://www.jakekuo.com'],
+    credentials: true
   })
 )
 
 // Routes
 app.use('/api/auth', authRoutes)
+app.use('/api/ai', aiRoutes)
 
 // MongoDB Connection
 mongoose
