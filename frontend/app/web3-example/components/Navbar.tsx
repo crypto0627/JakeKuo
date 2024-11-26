@@ -6,24 +6,24 @@ import Link from 'next/link'
 import { Eye, EyeOff, Menu, X } from 'lucide-react'
 
 export function Navbar() {
-  const LinkItem = [
-    { name: 'Profile', link: '/web3-example/profile' },
-    { name: 'Events', link: '/web3-example/events' },
-    { name: 'News', link: '/web3-example/news' },
-    { name: 'NFT Market', link: '/web3-example/nft-market' }
-  ]
+  const LinkItem = [{ name: 'get-start', link: '/web3-example/get-start' }]
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isLoginClick, setIsLoginClick] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [userEmail, setUserEmail] = useState('')
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const toggleLogin = () => setIsLoginClick(!isLoginClick)
 
   useEffect(() => {
     // 檢查是否已登入
     const token = localStorage.getItem('accessToken')
+    const email = localStorage.getItem('userEmail')
     if (token) {
       setIsLoggedIn(true)
+      if (email) {
+        setUserEmail(email)
+      }
     }
   }, [])
 
@@ -39,9 +39,11 @@ export function Navbar() {
 
       if (response.ok) {
         localStorage.removeItem('accessToken')
+        localStorage.removeItem('userEmail')
         document.cookie =
           'refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT'
         setIsLoggedIn(false)
+        setUserEmail('')
       }
     } catch (error) {
       console.error('登出失敗:', error)
@@ -55,20 +57,44 @@ export function Navbar() {
           Web3 Example
         </Link>
         <div className="hidden md:flex items-center space-x-5">
-          {LinkItem.map((item, index) => (
-            <div key={index}>
-              <Link href={item.link} className="text-gray-300 hover:text-white">
-                {item.name}
-              </Link>
-            </div>
-          ))}
           {isLoggedIn ? (
-            <Button
-              className="text-purple-300 font-bold hover:scale-125 transition-transform duration-500"
-              onClick={handleSignOut}
-            >
-              Sign Out
-            </Button>
+            <>
+              {LinkItem.map((item, index) => (
+                <div key={index}>
+                  <Link
+                    href={item.link}
+                    className="text-gray-300 hover:text-white"
+                  >
+                    {item.name}
+                  </Link>
+                </div>
+              ))}
+            </>
+          ) : (
+            <p className="text-xl font-bold text-white">
+              Please Login/SignUp to use AIchat bot
+            </p>
+          )}
+
+          {isLoggedIn ? (
+            <>
+              <Button
+                className="text-purple-300 font-bold"
+                variant="ghost"
+                onClick={() => {
+                  navigator.clipboard.writeText(userEmail)
+                  alert('Email is copied!')
+                }}
+              >
+                {userEmail}
+              </Button>
+              <Button
+                className="text-purple-300 font-bold hover:scale-125 transition-transform duration-500"
+                onClick={handleSignOut}
+              >
+                Sign Out
+              </Button>
+            </>
           ) : (
             <Button
               className="text-purple-300 font-bold hover:scale-125 transition-transform duration-500"
@@ -96,23 +122,44 @@ export function Navbar() {
           )}
           {isMenuOpen && (
             <nav className="absolute top-14 left-0 right-0 flex flex-col items-start px-10 space-y-6 w-full py-8 bg-black opacity-75">
-              {LinkItem.map((item, index) => (
-                <Link
-                  key={index}
-                  href={item.link}
-                  className="text-gray-100 hover:text-white hover:border-b-2"
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {isLoggedIn ? (
+                <>
+                  {LinkItem.map((item, index) => (
+                    <div key={index}>
+                      <Link
+                        href={item.link}
+                        className="text-gray-300 hover:text-white"
+                      >
+                        {item.name}
+                      </Link>
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <p className="text-xl font-bold text-white">
+                  Please Login/SignUp to use AIchat bot
+                </p>
+              )}
               <hr className="my-8 w-full border-2 bg-white rounded-lg" />
               {isLoggedIn ? (
-                <Button
-                  className="text-purple-300 font-bold hover:scale-125 transition-transform duration-500"
-                  onClick={handleSignOut}
-                >
-                  Sign Out
-                </Button>
+                <>
+                  <Button
+                    className="text-purple-300 font-bold"
+                    variant="ghost"
+                    onClick={() => {
+                      navigator.clipboard.writeText(userEmail)
+                      alert('Email is copied!')
+                    }}
+                  >
+                    {userEmail}
+                  </Button>
+                  <Button
+                    className="text-purple-300 font-bold hover:scale-125 transition-transform duration-500"
+                    onClick={handleSignOut}
+                  >
+                    Sign Out
+                  </Button>
+                </>
               ) : (
                 <Button
                   className="text-purple-300 font-bold hover:scale-125 transition-transform duration-500"
@@ -130,6 +177,7 @@ export function Navbar() {
           <LoginWindows
             toggleLogin={toggleLogin}
             setIsLoggedIn={setIsLoggedIn}
+            setUserEmail={setUserEmail}
           />
         )}
       </nav>
@@ -139,10 +187,12 @@ export function Navbar() {
 
 function LoginWindows({
   toggleLogin,
-  setIsLoggedIn
+  setIsLoggedIn,
+  setUserEmail
 }: {
   toggleLogin: () => void
   setIsLoggedIn: (value: boolean) => void
+  setUserEmail: (value: string) => void
 }) {
   const [isSignUp, setIsSignUp] = useState(false)
   const toggleSignUp = () => setIsSignUp(!isSignUp)
@@ -167,6 +217,7 @@ function LoginWindows({
             toggleSignUp={toggleSignUp}
             toggleLogin={toggleLogin}
             setIsLoggedIn={setIsLoggedIn}
+            setUserEmail={setUserEmail}
           />
         )}
       </section>
@@ -177,11 +228,13 @@ function LoginWindows({
 function Login({
   toggleSignUp,
   toggleLogin,
-  setIsLoggedIn
+  setIsLoggedIn,
+  setUserEmail
 }: {
   toggleSignUp: () => void
   toggleLogin: () => void
   setIsLoggedIn: (value: boolean) => void
+  setUserEmail: (value: string) => void
 }) {
   const [showPassword, setShowPassword] = useState(false)
   const [email, setEmail] = useState('')
@@ -211,8 +264,10 @@ function Login({
 
       // 儲存 Access Token 到 localStorage
       localStorage.setItem('accessToken', data.accessToken)
+      localStorage.setItem('userEmail', email)
 
       setIsLoggedIn(true)
+      setUserEmail(email)
       toggleLogin()
       console.log('登入成功:', data)
     } catch (err) {
