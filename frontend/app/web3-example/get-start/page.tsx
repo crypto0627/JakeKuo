@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useLayoutEffect, useCallback } from 'react'
+import { useState, useLayoutEffect, useCallback, useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -18,82 +18,136 @@ export default function AiChat() {
   const [input, setInput] = useState('')
   const [file, setFile] = useState<File | null>(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [aiResponse, setAiResponse] = useState('')
+  const [isTyping, setIsTyping] = useState(false)
+  const abortControllerRef = useRef<AbortController | null>(null)
 
-  // 使用 debounce 來限制 API 呼叫頻率
-  const debouncedApiCall = useCallback(
-    debounce(async (prompt: string) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedStreamResponse = useCallback(
+    debounce(async (message: string) => {
       try {
-        const controller = new AbortController()
-        const timeoutId = setTimeout(() => controller.abort(), 60000)
+        // 如果有正在進行的請求,先中止它
+        if (abortControllerRef.current) {
+          abortControllerRef.current.abort()
+        }
 
-        const response = await fetch('http://localhost:11434/api/generate', {
+        // 創建新的 AbortController
+        abortControllerRef.current = new AbortController()
+
+        const response = await fetch('http://localhost:3001/api/ai/chat', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({
-            model: 'llama3.2',
-            prompt,
-            stream: true
-          }),
-          signal: controller.signal
+          body: JSON.stringify({ message }),
+          signal: abortControllerRef.current.signal
         })
+
+        if (!response.ok) {
+          throw new Error('API request failed')
+        }
 
         const reader = response.body?.getReader()
         const decoder = new TextDecoder()
-        let fullResponse = ''
 
-        if (reader) {
-          while (true) {
-            const { done, value } = await reader.read()
-            if (done) break
-
-            const chunk = decoder.decode(value)
-            const lines = chunk.split('\n')
-
-            lines.forEach((line) => {
-              if (line.trim()) {
-                try {
-                  const data = JSON.parse(line)
-                  fullResponse += data.response
-                  setAiResponse(fullResponse)
-                } catch (e) {
-                  console.error('解析JSON失敗:', e)
-                }
-              }
-            })
-          }
+        if (!reader) {
+          throw new Error('Failed to get response stream')
         }
 
-        clearTimeout(timeoutId)
-      } catch (error) {
-        console.error('Error calling Ollama API:', error)
-        setAiResponse(
-          error instanceof Error && error.name === 'AbortError'
-            ? '請求超時,請稍後再試'
-            : '抱歉,發生錯誤,請稍後再試'
-        )
+        let currentResponse = ''
+        let buffer = '' // 用於存儲不完整的JSON字符串
+
+        while (true) {
+          const { done, value } = await reader.read()
+
+          if (done) {
+            break
+          }
+
+          const chunk = decoder.decode(value)
+          buffer += chunk
+
+          // 處理完整的JSON行
+          const lines = buffer.split('\n')
+          buffer = lines.pop() || '' // 保存最後一個不完整的行
+
+          for (const line of lines) {
+            if (line.trim()) {
+              try {
+                const data = JSON.parse(line.replace('data: ', ''))
+                if (data.success) {
+                  currentResponse += data.data.response || ''
+
+                  // 使用函數式更新來避免閉包問題
+                  setMessages((prevMessages) => {
+                    const lastMessage = prevMessages[prevMessages.length - 1]
+                    if (lastMessage?.type === 'ai') {
+                      return prevMessages.map((msg, index) =>
+                        index === prevMessages.length - 1
+                          ? { ...msg, content: currentResponse }
+                          : msg
+                      )
+                    }
+                    return prevMessages
+                  })
+
+                  if (data.data.done) {
+                    setIsLoading(false)
+                    setIsTyping(false)
+                    break
+                  }
+                }
+              } catch (parseError) {
+                console.error('Error parsing response data:', parseError)
+              }
+            }
+          }
+        }
+      } catch (error: unknown) {
+        if (error instanceof Error && error.name === 'AbortError') {
+          console.log('Request aborted')
+          return
+        }
+
+        console.error('Error calling AI API:', error)
+        setMessages((prevMessages) => {
+          const lastMessage = prevMessages[prevMessages.length - 1]
+          if (lastMessage?.type === 'ai') {
+            return prevMessages.map((msg, index) =>
+              index === prevMessages.length - 1
+                ? {
+                    ...msg,
+                    content: 'Sorry, an error occurred. Please try again later.'
+                  }
+                : msg
+            )
+          }
+          return prevMessages
+        })
+        setIsLoading(false)
+        setIsTyping(false)
+      } finally {
+        abortControllerRef.current = null
       }
-    }, 500),
+    }, 300), // 降低 debounce 時間以提高響應速度
     []
   )
 
   useLayoutEffect(() => {
-    if (aiResponse) {
-      setMessages((prevMessages) => {
-        const newMessages = [...prevMessages]
-        const lastMessage = newMessages[newMessages.length - 1]
-        if (lastMessage && lastMessage.type === 'ai') {
-          lastMessage.content = aiResponse
-        }
-        return newMessages
-      })
+    if (isTyping) {
+      handleSend()
     }
-  }, [aiResponse])
+
+    // 組件卸載時中止所有請求
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isTyping])
 
   const handleSend = async () => {
-    if (input.trim() || file) {
+    if (!isLoading && (input.trim() || file)) {
       const newMessage: Message = {
         id: Date.now(),
         type: 'user',
@@ -104,21 +158,27 @@ export default function AiChat() {
       const aiMessage: Message = {
         id: Date.now() + 1,
         type: 'ai',
-        content: ''
+        content: 'thinking...'
       }
 
       setMessages((prev) => [...prev, newMessage, aiMessage])
       setIsLoading(true)
-      await debouncedApiCall(input.trim())
-      setIsLoading(false)
+      await debouncedStreamResponse(input.trim())
       setInput('')
       setFile(null)
+      setIsTyping(false)
     }
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setFile(e.target.files[0])
+    const selectedFile = e.target.files?.[0]
+    if (selectedFile) {
+      // 檢查文件大小 (例如限制為 5MB)
+      if (selectedFile.size > 5 * 1024 * 1024) {
+        alert('File size should not exceed 5MB')
+        return
+      }
+      setFile(selectedFile)
     }
   }
 
@@ -129,7 +189,7 @@ export default function AiChat() {
         <ScrollArea className="h-[calc(100vh-16rem)]">
           {messages.length === 0 ? (
             <div className="flex items-center justify-center h-full text-gray-500">
-              Start Chat with AI!
+              Start chatting with AI!
             </div>
           ) : (
             messages.map((message) => (
@@ -174,7 +234,7 @@ export default function AiChat() {
                             rel="noopener noreferrer"
                             className="text-blue-200 underline hover:text-blue-100"
                           >
-                            See {message.file.name}
+                            View {message.file.name}
                           </Link>
                         )}
                       </div>
@@ -214,18 +274,20 @@ export default function AiChat() {
         <Textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Input your message..."
+          placeholder="Enter your message..."
           className="flex-grow min-h-[3rem] max-h-32 resize-none text-white"
           onKeyDown={(e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
               e.preventDefault()
-              handleSend()
+              if (!isTyping) {
+                setIsTyping(true)
+              }
             }
           }}
           disabled={isLoading}
         />
         <Button
-          onClick={handleSend}
+          onClick={() => !isTyping && setIsTyping(true)}
           className="px-6 hover:bg-blue-600"
           disabled={isLoading}
         >
