@@ -3,7 +3,6 @@ import Head from 'next/head'
 import localFont from 'next/font/local'
 import './globals.css'
 import { GoogleAnalytics } from '@next/third-parties/google'
-import { NextAuthProvider } from './web3-example/provider'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -48,7 +47,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased text-black`}
       >
-        <NextAuthProvider>{children}</NextAuthProvider>
+        <>{children}</>
       </body>
     </html>
   )
