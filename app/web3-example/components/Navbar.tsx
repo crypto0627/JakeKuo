@@ -1,8 +1,11 @@
 'use client'
+import { FormEvent, useEffect, useRef, useState } from 'react'
+import { signIn, signOut, useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { useState } from 'react'
 import { Eye, EyeOff, Menu, X } from 'lucide-react'
+import { register } from '../actions/register'
 
 export function Navbar() {
   const LinkItem = [
@@ -16,6 +19,51 @@ export function Navbar() {
   const [isLoginClick, setIsLoginClick] = useState(false)
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const toggleLogin = () => setIsLoginClick(!isLoginClick)
+
+  const { status } = useSession()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      toggleLogin()
+      // 重新渲染组件
+      router.push('/web3-example')
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status, router])
+
+  const showSession = () => {
+    if (status === 'authenticated') {
+      return (
+        <Button
+          className="text-purple-300 font-bold hover:scale-125 transition-transform duration-500"
+          onClick={() => {
+            signOut({ redirect: false }).then(() => {
+              router.push('/web3-example')
+            })
+          }}
+        >
+          Sign Out
+        </Button>
+      )
+    } else if (status === 'loading') {
+      return (
+        <span className="text-purple-300 font-bold text-sm mt-7">
+          Loading...
+        </span>
+      )
+    } else {
+      return (
+        <Button
+          className="text-purple-300 font-bold hover:scale-125 transition-transform duration-500"
+          onClick={toggleLogin}
+        >
+          Login/SignUp
+        </Button>
+      )
+    }
+  }
 
   return (
     <header>
@@ -31,12 +79,7 @@ export function Navbar() {
               </Link>
             </div>
           ))}
-          <Button
-            className="text-purple-300 font-bold hover:scale-125 transition-transform duration-500"
-            onClick={toggleLogin}
-          >
-            Login/SignUp
-          </Button>
+          {showSession()}
         </div>
 
         {/* Mobile */}
@@ -66,12 +109,7 @@ export function Navbar() {
                 </Link>
               ))}
               <hr className="my-8 w-full border-2 bg-white rounded-lg" />
-              <Button
-                className="text-purple-300 font-bold hover:scale-125 transition-transform duration-500"
-                onClick={toggleLogin}
-              >
-                Login/SignUp
-              </Button>
+              {showSession()}
             </nav>
           )}
         </div>
@@ -111,24 +149,61 @@ function LoginWindows({ toggleLogin }: { toggleLogin: () => void }) {
 }
 
 function Login({ toggleSignUp }: { toggleSignUp: () => void }) {
+  const [showPassword, setShowPassword] = useState(false)
+  const [error, setError] = useState('')
+  const router = useRouter()
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const formData = new FormData(event.currentTarget)
+    const res = await signIn('credentials', {
+      email: formData.get('email'),
+      password: formData.get('password'),
+      redirect: false // 改为 false 以便手动处理重定向
+    })
+    if (res?.error) {
+      setError(res.error as string)
+    }
+    if (res?.ok) {
+      router.push('/web3-example')
+    }
+  }
+
   return (
-    <form className="flex flex-col space-y-4">
+    <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
       <header className="flex justify-center mb-4">
         <h2 className="text-2xl font-bold text-white">Login</h2>
       </header>
+      {error && <div className="text-black">{error}</div>}
       <input
         type="email"
         placeholder="Email"
         className="p-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
         aria-label="Email"
+        name="email"
       />
 
-      <input
-        type="password"
-        placeholder="Password"
-        className="p-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
-        aria-label="Password"
-      />
+      <div className="relative">
+        <input
+          type={showPassword ? 'text' : 'password'}
+          placeholder="Password"
+          className="w-full p-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          aria-label="Password"
+          name="password"
+        />
+        <button
+          type="button"
+          className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-300"
+          onClick={() => setShowPassword(!showPassword)}
+          aria-label={showPassword ? 'Hide Password' : 'Show Password'}
+        >
+          {showPassword ? (
+            <Eye className="h-5 w-5" />
+          ) : (
+            <EyeOff className="h-5 w-5" />
+          )}
+        </button>
+      </div>
 
       <button
         type="submit"
@@ -154,17 +229,41 @@ function Login({ toggleSignUp }: { toggleSignUp: () => void }) {
 function SignUp({ toggleSignUp }: { toggleSignUp: () => void }) {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [error, setError] = useState<string>()
+  const router = useRouter()
+  const ref = useRef<HTMLFormElement>(null)
+
+  const handleSubmit = async (formData: FormData) => {
+    const email = formData.get('email') as string | null
+    const password = formData.get('password') as string | null
+
+    if (email && password) {
+      const r = await register({
+        email,
+        password
+      })
+      ref.current?.reset()
+      if (r?.error) {
+        setError(r.error)
+        return
+      } else {
+        return router.push('/web3-example')
+      }
+    }
+  }
 
   return (
-    <form className="flex flex-col space-y-4">
+    <form ref={ref} action={handleSubmit} className="flex flex-col space-y-4">
       <header className="flex justify-center mb-4">
         <h2 className="text-2xl font-bold text-white">Sign Up</h2>
       </header>
+      {error && <div className="">{error}</div>}
       <input
         type="email"
         placeholder="Email"
         className="p-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
         aria-label="Email"
+        name="email"
       />
 
       <div className="relative">
@@ -173,6 +272,7 @@ function SignUp({ toggleSignUp }: { toggleSignUp: () => void }) {
           placeholder="Password"
           className="w-full p-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
           aria-label="Password"
+          name="password"
         />
         <button
           type="button"
