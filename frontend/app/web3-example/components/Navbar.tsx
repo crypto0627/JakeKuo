@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import Link from 'next/link'
 import { Eye, EyeOff, Menu, X } from 'lucide-react'
 
@@ -14,8 +15,14 @@ export function Navbar() {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isLoginClick, setIsLoginClick] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const toggleLogin = () => setIsLoginClick(!isLoginClick)
+
+  const handleSignOut = () => {
+    document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT'
+    setIsLoggedIn(false)
+  }
 
   return (
     <header>
@@ -31,12 +38,21 @@ export function Navbar() {
               </Link>
             </div>
           ))}
-          <Button
-            className="text-purple-300 font-bold hover:scale-125 transition-transform duration-500"
-            onClick={toggleLogin}
-          >
-            Login/SignUp
-          </Button>
+          {isLoggedIn ? (
+            <Button
+              className="text-purple-300 font-bold hover:scale-125 transition-transform duration-500"
+              onClick={handleSignOut}
+            >
+              Sign Out
+            </Button>
+          ) : (
+            <Button
+              className="text-purple-300 font-bold hover:scale-125 transition-transform duration-500"
+              onClick={toggleLogin}
+            >
+              Login/SignUp
+            </Button>
+          )}
         </div>
 
         {/* Mobile */}
@@ -66,24 +82,44 @@ export function Navbar() {
                 </Link>
               ))}
               <hr className="my-8 w-full border-2 bg-white rounded-lg" />
-              <Button
-                className="text-purple-300 font-bold hover:scale-125 transition-transform duration-500"
-                onClick={toggleLogin}
-              >
-                Login/SignUp
-              </Button>
+              {isLoggedIn ? (
+                <Button
+                  className="text-purple-300 font-bold hover:scale-125 transition-transform duration-500"
+                  onClick={handleSignOut}
+                >
+                  Sign Out
+                </Button>
+              ) : (
+                <Button
+                  className="text-purple-300 font-bold hover:scale-125 transition-transform duration-500"
+                  onClick={toggleLogin}
+                >
+                  Login/SignUp
+                </Button>
+              )}
             </nav>
           )}
         </div>
 
         {/* LoginWindows */}
-        {isLoginClick && <LoginWindows toggleLogin={toggleLogin} />}
+        {isLoginClick && (
+          <LoginWindows
+            toggleLogin={toggleLogin}
+            setIsLoggedIn={setIsLoggedIn}
+          />
+        )}
       </nav>
     </header>
   )
 }
 
-function LoginWindows({ toggleLogin }: { toggleLogin: () => void }) {
+function LoginWindows({
+  toggleLogin,
+  setIsLoggedIn
+}: {
+  toggleLogin: () => void
+  setIsLoggedIn: (value: boolean) => void
+}) {
   const [isSignUp, setIsSignUp] = useState(false)
   const toggleSignUp = () => setIsSignUp(!isSignUp)
 
@@ -103,39 +139,88 @@ function LoginWindows({ toggleLogin }: { toggleLogin: () => void }) {
         {isSignUp ? (
           <SignUp toggleSignUp={toggleSignUp} />
         ) : (
-          <Login toggleSignUp={toggleSignUp} />
+          <Login
+            toggleSignUp={toggleSignUp}
+            toggleLogin={toggleLogin}
+            setIsLoggedIn={setIsLoggedIn}
+          />
         )}
       </section>
     </div>
   )
 }
 
-function Login({ toggleSignUp }: { toggleSignUp: () => void }) {
+function Login({
+  toggleSignUp,
+  toggleLogin,
+  setIsLoggedIn
+}: {
+  toggleSignUp: () => void
+  toggleLogin: () => void
+  setIsLoggedIn: (value: boolean) => void
+}) {
   const [showPassword, setShowPassword] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState<string | null>(null)
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault() // 防止表單預設刷新行為
+    setError(null)
+
+    try {
+      const response = await fetch('http://localhost:3001/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.message || 'Login failed')
+      }
+
+      const data = await response.json()
+      // 將 token 存到 cookie
+      document.cookie = `token=${data.token}; path=/; max-age=3600; secure; samesite=strict`
+      setIsLoggedIn(true)
+      toggleLogin()
+      console.log('登入成功:', data)
+    } catch (err) {
+      setError((err as Error).message)
+    }
+  }
 
   return (
-    <form className="flex flex-col space-y-4">
+    <form onSubmit={handleLogin} className="flex flex-col space-y-4">
       <header className="flex justify-center mb-4">
         <h2 className="text-2xl font-bold text-white">Login</h2>
       </header>
-      <input
+      {error && <p className="text-red-500 text-sm">{error}</p>}
+      <Input
         type="email"
         placeholder="Email"
-        className="p-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+        className="bg-gray-700 text-white placeholder-gray-400"
         aria-label="Email"
         name="email"
+        onChange={(e) => setEmail(e.target.value)}
       />
 
       <div className="relative">
-        <input
+        <Input
           type={showPassword ? 'text' : 'password'}
           placeholder="Password"
-          className="w-full p-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          className="bg-gray-700 text-white placeholder-gray-400"
           aria-label="Password"
           name="password"
+          onChange={(e) => setPassword(e.target.value)}
         />
-        <button
+        <Button
           type="button"
+          variant="ghost"
+          size="icon"
           className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-300"
           onClick={() => setShowPassword(!showPassword)}
           aria-label={showPassword ? 'Hide Password' : 'Show Password'}
@@ -145,25 +230,26 @@ function Login({ toggleSignUp }: { toggleSignUp: () => void }) {
           ) : (
             <EyeOff className="h-5 w-5" />
           )}
-        </button>
+        </Button>
       </div>
 
-      <button
+      <Button
         type="submit"
-        className="bg-purple-600 text-white py-2 rounded hover:bg-purple-700 transition duration-300"
+        className="bg-purple-600 text-white hover:bg-purple-700"
       >
         Login
-      </button>
+      </Button>
 
       <footer className="flex justify-center items-center space-x-2 text-sm text-gray-400">
         <span>Don&apos;t have an account?</span>
-        <button
+        <Button
           type="button"
+          variant="link"
           className="text-purple-400 hover:text-purple-300"
           onClick={toggleSignUp}
         >
           Sign Up
-        </button>
+        </Button>
       </footer>
     </form>
   )
@@ -172,30 +258,77 @@ function Login({ toggleSignUp }: { toggleSignUp: () => void }) {
 function SignUp({ toggleSignUp }: { toggleSignUp: () => void }) {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<string | null>(null)
+
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError(null)
+    setSuccess(null)
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.')
+      return
+    }
+
+    try {
+      const response = await fetch('http://localhost:3001/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.message || 'Sign Up failed')
+      }
+
+      const data = await response.json()
+      setSuccess('Sign Up successful! You can now log in.')
+      console.log('Sign Up successful:', data)
+    } catch (err) {
+      setError((err as Error).message)
+    }
+  }
 
   return (
-    <form className="flex flex-col space-y-4">
+    <form onSubmit={handleSignUp} className="flex flex-col space-y-4">
       <header className="flex justify-center mb-4">
         <h2 className="text-2xl font-bold text-white">Sign Up</h2>
       </header>
-      <input
+
+      {error && <p className="text-red-500 text-sm">{error}</p>}
+      {success && <p className="text-green-500 text-sm">{success}</p>}
+
+      <Input
         type="email"
         placeholder="Email"
-        className="p-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="bg-gray-700 text-white placeholder-gray-400"
         aria-label="Email"
         name="email"
       />
 
       <div className="relative">
-        <input
+        <Input
           type={showPassword ? 'text' : 'password'}
           placeholder="Password"
-          className="w-full p-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="bg-gray-700 text-white placeholder-gray-400"
           aria-label="Password"
           name="password"
         />
-        <button
+        <Button
           type="button"
+          variant="ghost"
+          size="icon"
           className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-300"
           onClick={() => setShowPassword(!showPassword)}
           aria-label={showPassword ? 'Hide Password' : 'Show Password'}
@@ -205,18 +338,22 @@ function SignUp({ toggleSignUp }: { toggleSignUp: () => void }) {
           ) : (
             <EyeOff className="h-5 w-5" />
           )}
-        </button>
+        </Button>
       </div>
 
       <div className="relative">
-        <input
+        <Input
           type={showConfirmPassword ? 'text' : 'password'}
           placeholder="Password Confirm"
-          className="w-full p-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          className="bg-gray-700 text-white placeholder-gray-400"
           aria-label="Confirm Password"
         />
-        <button
+        <Button
           type="button"
+          variant="ghost"
+          size="icon"
           className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-300"
           onClick={() => setShowConfirmPassword(!showConfirmPassword)}
           aria-label={
@@ -230,25 +367,26 @@ function SignUp({ toggleSignUp }: { toggleSignUp: () => void }) {
           ) : (
             <EyeOff className="h-5 w-5" />
           )}
-        </button>
+        </Button>
       </div>
 
-      <button
+      <Button
         type="submit"
-        className="bg-purple-600 text-white py-2 rounded hover:bg-purple-700 transition duration-300"
+        className="bg-purple-600 text-white hover:bg-purple-700"
       >
         Sign Up
-      </button>
+      </Button>
 
       <footer className="flex justify-center items-center space-x-2 text-sm text-gray-400">
         <span>Have an account?</span>
-        <button
+        <Button
           type="button"
+          variant="link"
           className="text-purple-400 hover:text-purple-300"
           onClick={toggleSignUp}
         >
           Login
-        </button>
+        </Button>
       </footer>
     </form>
   )

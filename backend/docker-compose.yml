@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # Node.js 應用服務
+  app:
+    image: node:18 # 你可以根據需要選擇不同版本的 Node.js
+    container_name: backend # 容器名稱
+    working_dir: /usr/src/app # 容器內應用程式所在目錄
+    volumes:
+      - .:/usr/src/app # 將本地檔案夾映射到容器內部
+    ports:
+      - "3001:3001" # 映射端口
+    environment:
+      - NODE_ENV=development # 設定環境變數
+      - MONGO_URI=mongodb://mongo:27017/auth_db # MongoDB 連接字串，指向 `mongo` 服務
+      - REDIS_URI=redis://redis:6379 # Redis 連接字串，修正為指向 redis 服務
+    command: ["pnpm", "dev"] # 啟動應用命令
+    depends_on:
+      - mongo # 確保 MongoDB 容器啟動後再啟動此服務
+      - redis # 確保 Redis 容器啟動後再啟動此服務
+
+  # MongoDB 服務
+  mongo:
+    image: mongo:latest # 使用最新的 MongoDB 鏡像
+    container_name: mongodb # 容器名稱
+    volumes:
+      - mongo-data:/data/db # 將 MongoDB 資料持久化存儲
+    ports:
+      - "27017:27017" # 映射端口
+    networks:
+      - backend # 設定容器網絡
+
+  # Redis 服務
+  redis:
+    image: redis:latest # 使用最新的 Redis 鏡像
+    container_name: redis # 容器名稱
+    ports:
+      - "6379:6379" # 映射端口
+    networks:
+      - backend # 設定容器網絡
+
+volumes:
+  mongo-data: # 用來持久化 MongoDB 資料
+    driver: local
+
+networks:
+  backend:
+    driver: bridge # 設定網絡

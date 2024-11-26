@@ -1,12 +1,4 @@
-import {
-  Banner,
-  Features,
-  Footer,
-  Gallery,
-  Navbar,
-  News,
-  TeamMember
-} from './components'
+import { Banner, Features, Footer, Gallery, Navbar } from './components'
 
 export default function Home() {
   return (
@@ -15,8 +7,6 @@ export default function Home() {
       <Banner />
       <Features />
       <Gallery />
-      <News />
-      <TeamMember />
       <Footer />
     </main>
   )
