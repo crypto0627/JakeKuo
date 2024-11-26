@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import Link from 'next/link'
@@ -19,9 +19,33 @@ export function Navbar() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const toggleLogin = () => setIsLoginClick(!isLoginClick)
 
-  const handleSignOut = () => {
-    document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT'
-    setIsLoggedIn(false)
+  useEffect(() => {
+    // 檢查是否已登入
+    const token = localStorage.getItem('accessToken')
+    if (token) {
+      setIsLoggedIn(true)
+    }
+  }, [])
+
+  const handleSignOut = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/api/auth/signout', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+      })
+
+      if (response.ok) {
+        localStorage.removeItem('accessToken')
+        document.cookie =
+          'refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT'
+        setIsLoggedIn(false)
+      }
+    } catch (error) {
+      console.error('登出失敗:', error)
+    }
   }
 
   return (
@@ -165,12 +189,13 @@ function Login({
   const [error, setError] = useState<string | null>(null)
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault() // 防止表單預設刷新行為
+    e.preventDefault()
     setError(null)
 
     try {
       const response = await fetch('http://localhost:3001/api/auth/login', {
         method: 'POST',
+        credentials: 'include', // 允許跨域請求攜帶 cookie
         headers: {
           'Content-Type': 'application/json'
         },
@@ -183,8 +208,10 @@ function Login({
       }
 
       const data = await response.json()
-      // 將 token 存到 cookie
-      document.cookie = `token=${data.token}; path=/; max-age=3600; secure; samesite=strict`
+
+      // 儲存 Access Token 到 localStorage
+      localStorage.setItem('accessToken', data.accessToken)
+
       setIsLoggedIn(true)
       toggleLogin()
       console.log('登入成功:', data)
