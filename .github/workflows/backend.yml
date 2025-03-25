@@ -1,28 +1,37 @@
-name: Backend CI/CD
+name: CI/CD Backend
 
 on:
   push:
-    branches:
-      - '**'
+    branches: ['**']
   pull_request:
     types: [opened, synchronize]
 
 jobs:
-  build-and-test:
+  build-ai-backend:
+    name: Build AI Backend
+    timeout-minutes: 15
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
 
-      - name: Setup Node.js and pnpm
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: pnpm install
 
-      - name: Build TypeScript
-        run: pnpm build
+      - name: Build ai-backend
+        run: pnpm run build
         working-directory: apps/ai-backend
