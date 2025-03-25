@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://jakekuo.com
-
-# Sitemaps
-Sitemap: https://jakekuo.com/sitemap.xml

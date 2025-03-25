@@ -1,0 +1,64 @@
+services:
+  timescaledb:
+      image: timescale/timescaledb:latest-pg14
+      container_name: timescaledb
+      ports:
+        - "5432:5432"
+      environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=password
+        - POSTGRES_DB=timescaledb
+      volumes:
+        - timescaledb_data:/var/lib/postgresql/data
+      networks:
+        - ai-network
+      restart: always
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ./apps/frontend/Dockerfile
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - ai-network
+    restart: always
+
+  ai-frontend:
+    build:
+      context: .
+      dockerfile: ./apps/ai-frontend/Dockerfile
+    container_name: ai-frontend
+    ports:
+      - "3001:3001"
+    networks:
+      - ai-network
+    restart: always
+
+  ai-backend:
+    build:
+      context: .
+      dockerfile: ./apps/ai-backend/Dockerfile
+    container_name: ai-backend
+    ports:
+      - "4000:4000"
+    networks:
+      - ai-network
+    restart: always
+    environment:
+      - DATABASE_URL='postgres://postgres:password@timescaledb:5432/timescaledb'
+      - DATABASE_HOST='timescaledb'
+      - DATABASE_PORT='5432'
+      - DATABASE_USER='postgres'
+      - DATABASE_PASSWORD='password'
+      - DATABASE_NAME='timescaledb'
+
+
+volumes:
+  timescaledb_data:
+    driver: local
+
+networks:
+  ai-network:
+    driver: bridge

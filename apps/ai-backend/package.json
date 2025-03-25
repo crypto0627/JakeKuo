@@ -1,0 +1,36 @@
+{
+  "name": "ai-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.ts",
+  "scripts": {
+    "dev": "ts-node src/server.ts",
+    "build": "tsc",
+    "start": "ts-node -r ./tsconfig-paths-bootstrap.js src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "@types/pg": "^8.11.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@langchain/community": "^0.3.35",
+    "@langchain/core": "^0.3.42",
+    "@langchain/langgraph": "^0.2.56",
+    "@langchain/ollama": "^0.2.0",
+    "@langchain/openai": "^0.4.4",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "graphql": "^16.10.0",
+    "graphql-yoga": "^5.13.1",
+    "langchain": "^0.3.19",
+    "pg": "^8.14.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.6",
+    "sequelize-cli": "^6.6.2"
+  }
+}

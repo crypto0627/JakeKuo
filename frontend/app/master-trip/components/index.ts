@@ -1,8 +1,0 @@
-export { Navbar } from './navbar'
-export { Banner } from './banner'
-export { FlightInfo } from './flightInfo'
-export { Schedule } from './shcedule'
-export { Ticket } from './ticket'
-export { Transportation } from './transportation'
-export { Cuisine } from './cuisine'
-export { Footer } from './footer'
