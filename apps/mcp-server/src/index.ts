@@ -153,7 +153,7 @@ server.tool(
           ],
         };
       }
-  
+
       const forecastUrl = pointsData.properties?.forecast;
       if (!forecastUrl) {
         return {
@@ -201,7 +201,7 @@ server.tool(
           "---",
         ].join("\n"),
       );
-  
+
       const forecastText = `Forecast for ${latitude}, ${longitude}:\n\n${formattedForecast.join("\n")}`;
   
       return {
@@ -225,3 +225,4 @@ server.tool(
     console.error("Fatal error in main():", error);
     process.exit(1);
   });
+  

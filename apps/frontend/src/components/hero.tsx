@@ -1,10 +1,10 @@
-"use client"
+'use client'
 
-import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
-import { FileText, Sparkles } from "lucide-react"
-import { FloatingPaper } from "@/components/floating-paper"
-import { RoboAnimation } from "@/components/robo-animation"
+import { Button } from '@/components/ui/button'
+import { motion } from 'framer-motion'
+import { FileText, Sparkles } from 'lucide-react'
+import { FloatingPaper } from '@/components/floating-paper'
+import { RoboAnimation } from '@/components/robo-animation'
 
 export default function Hero() {
   return (
@@ -20,7 +20,7 @@ export default function Hero() {
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
               Transform Your Research with
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-                {" "}
+                {' '}
                 AI Power
               </span>
             </h1>

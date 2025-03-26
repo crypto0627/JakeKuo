@@ -1,8 +1,9 @@
-"use client"
+'use client'
 
-import { motion } from "framer-motion"
-import { Bot } from "lucide-react"
+import { motion } from 'framer-motion'
+import { Bot } from 'lucide-react'
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export function RoboAnimation() {
   return (
     <div className="relative w-full h-full">
@@ -14,7 +15,7 @@ export function RoboAnimation() {
         transition={{
           duration: 4,
           repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
+          ease: 'easeInOut',
         }}
       >
         <div className="relative">
@@ -27,7 +28,7 @@ export function RoboAnimation() {
             transition={{
               duration: 4,
               repeat: Number.POSITIVE_INFINITY,
-              ease: "easeInOut",
+              ease: 'easeInOut',
             }}
           />
           <Bot className="w-32 h-32 text-purple-500" />

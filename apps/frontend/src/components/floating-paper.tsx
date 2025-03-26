@@ -1,15 +1,15 @@
-"use client"
+'use client'
 
-import { motion } from "framer-motion"
-import { FileText } from "lucide-react"
-import { useEffect, useState } from "react"
+import { motion } from 'framer-motion'
+import { FileText } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 export function FloatingPaper({ count = 5 }) {
   const [dimensions, setDimensions] = useState({ width: 1200, height: 800 })
   const [positions, setPositions] = useState<Array<{
-    initial: { x: number; y: number };
-    animate: { x: number[]; y: number[]; rotate: number[] };
-    duration: number;
+    initial: { x: number; y: number }
+    animate: { x: number[]; y: number[]; rotate: number[] }
+    duration: number
   }>>([])
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export function FloatingPaper({ count = 5 }) {
           rotate: [0, 180, 360],
         },
         duration: 20 + Math.random() * 10,
-      }))
+      })),
     )
 
     const handleResize = () => {
@@ -42,8 +42,8 @@ export function FloatingPaper({ count = 5 }) {
       })
     }
 
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [count])
 
   return (
@@ -61,7 +61,7 @@ export function FloatingPaper({ count = 5 }) {
           transition={{
             duration: position.duration,
             repeat: Number.POSITIVE_INFINITY,
-            ease: "linear",
+            ease: 'linear',
           }}
         >
           <div className="relative w-16 h-20 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 flex items-center justify-center transform hover:scale-110 transition-transform">

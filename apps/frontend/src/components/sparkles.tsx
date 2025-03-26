@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
-import { useMousePosition } from "@/lib/hooks/use-mouse-position"
-import { useEffect, useRef, useState } from "react"
+import { useMousePosition } from '@/lib/hooks/use-mouse-position'
+import { useEffect, useRef, useState } from 'react'
 
 interface SparklesProps {
   id?: string
@@ -32,21 +32,22 @@ interface CanvasDimensions {
   height: number
 }
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export const SparklesCore = ({
-  id = "tsparticles",
-  background = "transparent",
+  id = 'tsparticles',
+  background = 'transparent',
   minSize = 0.6,
   maxSize = 1.4,
   particleDensity = 100,
-  className = "h-full w-full",
-  particleColor = "#FFFFFF",
+  className = 'h-full w-full',
+  particleColor = '#FFFFFF',
 }: SparklesProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const mousePosition = useMousePosition()
   const [dimensions, setDimensions] = useState<CanvasDimensions>({ width: 1200, height: 800 })
 
   useEffect(() => {
-    if (typeof window === "undefined") return
+    if (typeof window === 'undefined') return
 
     setDimensions({
       width: window.innerWidth,
@@ -56,9 +57,10 @@ export const SparklesCore = ({
     const canvas: HTMLCanvasElement | null = canvasRef.current
     if (!canvas) return
 
-    const ctx = canvas.getContext("2d")
+    const ctx = canvas.getContext('2d')
     if (!ctx) return
 
+    // eslint-disable-next-line no-use-before-define
     let particles: Particle[] = []
     let animationFrameId: number
 
@@ -116,7 +118,7 @@ export const SparklesCore = ({
 
     const init = (): void => {
       particles = []
-      for (let i = 0; i < particleDensity; i++) {
+      for (let i = 0; i < particleDensity; i+=1) {
         particles.push(new Particle())
       }
     }
@@ -137,7 +139,7 @@ export const SparklesCore = ({
     animate()
 
     const handleResize = (): void => {
-      if (typeof window === "undefined") return
+      if (typeof window === 'undefined') return
 
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
@@ -148,10 +150,10 @@ export const SparklesCore = ({
       init()
     }
 
-    window.addEventListener("resize", handleResize)
+    window.addEventListener('resize', handleResize)
 
     return () => {
-      window.removeEventListener("resize", handleResize)
+      window.removeEventListener('resize', handleResize)
       cancelAnimationFrame(animationFrameId)
     }
   }, [maxSize, minSize, particleColor, particleDensity, mousePosition.x, mousePosition.y])
