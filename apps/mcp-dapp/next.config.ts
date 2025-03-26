@@ -9,13 +9,19 @@ const nextConfig: NextConfig = {
     };
     config.experiments = { ...config.experiments, topLevelAwait: true };
     config.optimization.minimizer = [];
-    config.resolve.fallback = { fs: false, net: false, tls: false };
+    config.resolve.fallback = { 
+      fs: false, 
+      net: false, 
+      tls: false,
+      'pino-pretty': false
+    };
     return config;
   },
   reactStrictMode: false,
   images: {
     unoptimized: true
   },
+  distDir: 'out',
   async headers() {
     return [
       {
